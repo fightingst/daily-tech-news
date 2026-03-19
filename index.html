@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>科技日报 Archives</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Noto+Serif+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+ :root {
+ --ink: #1a1208;
+ --ink-light: #3d2f1a;
+ --paper: #f5f0e8;
+ --paper-dark: #ede6d5;
+ --rule: #2a1f0e;
+ --accent: #8b1a1a;
+ --gray: #6b5c45;
+ --light-gray: #c8b99a;
+ }
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ body {
+ background: #d4c9b0;
+ font-family: 'IM Fell English', 'Noto Serif SC', serif;
+ color: var(--ink);
+ min-height: 100vh;
+ padding: 20px;
+ background-image: 
+ radial-gradient(ellipse at 20% 50%, rgba(139,90,43,0.08) 0%, transparent 60%),
+ radial-gradient(ellipse at 80% 20%, rgba(100,60,20,0.06) 0%, transparent 50%);
+ }
+
+ .newspaper {
+ max-width: 900px;
+ margin: 0 auto;
+ background: var(--paper);
+ box-shadow: 
+ 0 0 0 1px rgba(0,0,0,0.2),
+ 4px 4px 20px rgba(0,0,0,0.35),
+ 8px 8px 40px rgba(0,0,0,0.2);
+ position: relative;
+ overflow: hidden;
+ }
+
+ .newspaper::before {
+ content: '';
+ position: absolute;
+ inset: 0;
+ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+ pointer-events: none;
+ z-index: 10;
+ opacity: 0.6;
+ }
+
+ .masthead {
+ padding: 20px 40px;
+ border-bottom: 3px double var(--rule);
+ text-align: center;
+ }
+
+ .paper-name {
+ font-family: 'UnifrakturMaguntia', cursive;
+ font-size: clamp(32px, 5vw, 56px);
+ color: var(--ink);
+ letter-spacing: -1px;
+ margin-bottom: 5px;
+ }
+
+ .masthead-sub {
+ font-family: 'Playfair Display', serif;
+ font-style: italic;
+ font-size: 14px;
+ color: var(--gray);
+ letter-spacing: 0.1em;
+ }
+
+ .content-area {
+ padding: 30px 40px 40px;
+ }
+
+ .section-title {
+ font-family: 'Playfair Display', serif;
+ font-size: 18px;
+ font-weight: 700;
+ color: var(--ink);
+ text-align: center;
+ margin-bottom: 20px;
+ letter-spacing: 0.1em;
+ }
+
+ .archive-list {
+ list-style: none;
+ }
+
+ .archive-item {
+ display: flex;
+ align-items: center;
+ padding: 16px 20px;
+ margin-bottom: 12px;
+ background: var(--paper-dark);
+ border: 1px solid var(--light-gray);
+ transition: all 0.2s;
+ }
+
+ .archive-item:hover {
+ border-color: var(--accent);
+ box-shadow: 2px 2px 0 var(--rule);
+ transform: translate(-1px, -1px);
+ }
+
+ .archive-date {
+ font-family: 'Playfair Display', serif;
+ font-size: 20px;
+ font-weight: 700;
+ color: var(--accent);
+ min-width: 120px;
+ }
+
+ .archive-links {
+ display: flex;
+ gap: 15px;
+ flex: 1;
+ }
+
+ .archive-link {
+ font-family: 'Noto Serif SC', serif;
+ font-size: 14px;
+ color: var(--ink);
+ text-decoration: none;
+ padding: 6px 14px;
+ border: 1px solid var(--light-gray);
+ transition: all 0.2s;
+ }
+
+ .archive-link:hover {
+ background: var(--ink);
+ color: var(--paper);
+ border-color: var(--ink);
+ }
+
+ .archive-link .icon {
+ margin-right: 5px;
+ }
+
+ .footer {
+ border-top: 3px double var(--rule);
+ padding: 15px 40px;
+ text-align: center;
+ font-size: 12px;
+ color: var(--gray);
+ }
+
+ @media (max-width: 768px) {
+ body { padding: 10px; }
+ .masthead { padding: 15px 20px; }
+ .content-area { padding: 20px; }
+ .archive-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+ .archive-links { flex-direction: column; width: 100%; }
+ .archive-link { text-align: center; }
+ }
+</style>
+</head>
+<body>
+
+<div class="newspaper">
+ <div class="masthead">
+ <div class="paper-name">📰 科技日报 Archives</div>
+ <div class="masthead-sub">每日科技要闻 · 历史存档</div>
+ </div>
+
+ <div class="content-area">
+ <h2 class="section-title">📅 历史日报</h2>
+ 
+ <ul class="archive-list">
+ <li class="archive-item">
+ <span class="archive-date">2026.03.19</span>
+ <div class="archive-links">
+ <a href="2026/03/19/tech-daily.html" class="archive-link">📰 科技日报</a>
+ <a href="2026/03/19/github-trending.html" class="archive-link">🐙 GitHub Trending</a>
+ </div>
+ </li>
+ </ul>
+ </div>
+
+ <div class="footer">
+ Powered by OpenClaw · 太子监制
+ </div>
+</div>
+
+</body>
+</html>

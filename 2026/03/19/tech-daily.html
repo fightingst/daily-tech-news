@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>科技日报 · The Tech Daily</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Noto+Serif+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+ :root {
+ --ink: #1a1208;
+ --ink-light: #3d2f1a;
+ --paper: #f5f0e8;
+ --paper-dark: #ede6d5;
+ --rule: #2a1f0e;
+ --accent: #8b1a1a;
+ --gray: #6b5c45;
+ --light-gray: #c8b99a;
+ }
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ body {
+ background: #d4c9b0;
+ font-family: 'IM Fell English', 'Noto Serif SC', serif;
+ color: var(--ink);
+ min-height: 100vh;
+ padding: 20px;
+ background-image: 
+ radial-gradient(ellipse at 20% 50%, rgba(139,90,43,0.08) 0%, transparent 60%),
+ radial-gradient(ellipse at 80% 20%, rgba(100,60,20,0.06) 0%, transparent 50%);
+ }
+
+ .newspaper {
+ max-width: 1100px;
+ margin: 0 auto;
+ background: var(--paper);
+ box-shadow: 
+ 0 0 0 1px rgba(0,0,0,0.2),
+ 4px 4px 20px rgba(0,0,0,0.35),
+ 8px 8px 40px rgba(0,0,0,0.2);
+ position: relative;
+ overflow: hidden;
+ }
+
+ .newspaper::before {
+ content: '';
+ position: absolute;
+ inset: 0;
+ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+ pointer-events: none;
+ z-index: 10;
+ opacity: 0.6;
+ }
+
+ .masthead {
+ padding: 16px 40px 0;
+ border-bottom: 3px double var(--rule);
+ position: relative;
+ }
+
+ .masthead-top {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ font-size: 11px;
+ color: var(--gray);
+ font-family: 'Noto Serif SC', serif;
+ letter-spacing: 0.05em;
+ padding-bottom: 8px;
+ border-bottom: 1px solid var(--rule);
+ margin-bottom: 8px;
+ }
+
+ .paper-name {
+ font-family: 'UnifrakturMaguntia', cursive;
+ font-size: clamp(36px, 6vw, 72px);
+ text-align: center;
+ line-height: 1;
+ color: var(--ink);
+ letter-spacing: -1px;
+ text-shadow: 2px 2px 0 rgba(0,0,0,0.08);
+ padding: 6px 0 10px;
+ }
+
+ .masthead-sub {
+ text-align: center;
+ font-family: 'Playfair Display', serif;
+ font-style: italic;
+ font-size: 13px;
+ color: var(--gray);
+ letter-spacing: 0.15em;
+ padding-bottom: 12px;
+ }
+
+ .masthead-meta {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ font-size: 11px;
+ font-family: 'Noto Serif SC', serif;
+ color: var(--ink-light);
+ padding: 6px 0 10px;
+ border-top: 1px solid var(--rule);
+ }
+
+ .edition-tag {
+ background: var(--ink);
+ color: var(--paper);
+ padding: 2px 8px;
+ font-size: 10px;
+ letter-spacing: 0.12em;
+ text-transform: uppercase;
+ }
+
+ .content-area {
+ padding: 0 40px 40px;
+ }
+
+ .section-header {
+ margin: 28px 0 16px;
+ text-align: center;
+ position: relative;
+ }
+
+ .section-header::before,
+ .section-header::after {
+ content: '';
+ display: block;
+ height: 1px;
+ background: var(--rule);
+ }
+ .section-header::before { margin-bottom: 6px; }
+ .section-header::after { margin-top: 6px; }
+
+ .section-title {
+ font-family: 'Playfair Display', serif;
+ font-size: 11px;
+ font-weight: 700;
+ letter-spacing: 0.35em;
+ text-transform: uppercase;
+ color: var(--ink);
+ display: inline-block;
+ padding: 0 14px;
+ background: var(--paper);
+ position: relative;
+ z-index: 1;
+ }
+
+ .thick-rule {
+ height: 3px;
+ background: var(--rule);
+ margin: 4px 0;
+ }
+
+ /* 科技新闻布局 - 4列 */
+ .news-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr 1fr 1fr;
+ gap: 0;
+ border: 1px solid var(--rule);
+ }
+
+ .news-item {
+ padding: 16px;
+ border-right: 1px solid var(--light-gray);
+ border-bottom: 1px solid var(--light-gray);
+ position: relative;
+ transition: background 0.2s;
+ break-inside: avoid;
+ }
+
+ .news-item:hover { background: var(--paper-dark); }
+ .news-item:nth-child(4n) { border-right: none; }
+ .news-item:nth-last-child(-n+4) { border-bottom: none; }
+
+ .news-category {
+ font-family: 'Playfair Display', serif;
+ font-size: 9px;
+ font-weight: 700;
+ letter-spacing: 0.15em;
+ text-transform: uppercase;
+ color: var(--accent);
+ margin-bottom: 6px;
+ }
+
+ .news-headline {
+ font-family: 'Playfair Display', serif;
+ font-size: 14px;
+ font-weight: 700;
+ line-height: 1.4;
+ margin-bottom: 8px;
+ }
+
+ .news-headline a {
+ color: var(--ink);
+ text-decoration: none;
+ }
+
+ .news-headline a:hover { color: var(--accent); text-decoration: underline; }
+
+ .news-summary {
+ font-family: 'Noto Serif SC', serif;
+ font-size: 11.5px;
+ line-height: 1.6;
+ color: var(--ink-light);
+ display: -webkit-box;
+ -webkit-line-clamp: 3;
+ -webkit-box-orient: vertical;
+ overflow: hidden;
+ }
+
+ .news-byline {
+ font-size: 10px;
+ color: var(--gray);
+ font-style: italic;
+ margin-top: 8px;
+ font-family: 'IM Fell English', serif;
+ }
+
+ /* 今日热点 - 大卡片 */
+ .hot-topic {
+ display: flex;
+ gap: 20px;
+ border: 1px solid var(--rule);
+ padding: 20px;
+ margin-bottom: 20px;
+ background: var(--paper-dark);
+ }
+
+ .hot-topic-rank {
+ font-family: 'Playfair Display', serif;
+ font-size: 42px;
+ font-weight: 900;
+ color: var(--accent);
+ line-height: 1;
+ min-width: 60px;
+ }
+
+ .hot-topic-content {
+ flex: 1;
+ }
+
+ .hot-topic h3 {
+ font-family: 'Playfair Display', serif;
+ font-size: 22px;
+ font-weight: 700;
+ margin-bottom: 8px;
+ }
+
+ .hot-topic h3 a {
+ color: var(--ink);
+ text-decoration: none;
+ }
+
+ .hot-topic h3 a:hover { color: var(--accent); }
+
+ .hot-topic p {
+ font-family: 'Noto Serif SC', serif;
+ font-size: 13px;
+ line-height: 1.7;
+ color: var(--ink-light);
+ }
+
+ .hot-topic .source {
+ font-size: 11px;
+ color: var(--accent);
+ font-weight: 600;
+ margin-top: 8px;
+ }
+
+ .newspaper-footer {
+ border-top: 3px double var(--rule);
+ padding: 10px 40px;
+ display: flex;
+ justify-content: space-between;
+ font-family: 'Noto Serif SC', serif;
+ font-size: 10px;
+ color: var(--gray);
+ }
+
+ @media (max-width: 1024px) {
+ .news-grid { grid-template-columns: 1fr 1fr; }
+ }
+ @media (max-width: 768px) {
+ body { padding: 10px; }
+ .masthead { padding: 12px 20px 0; }
+ .content-area { padding: 0 20px 30px; }
+ .news-grid { grid-template-columns: 1fr; }
+ .hot-topic { flex-direction: column; }
+ .newspaper-footer { padding: 10px 20px; }
+ }
+</style>
+</head>
+<body>
+
+<div class="newspaper">
+ <div class="masthead">
+ <div class="masthead-top">
+ <span>Vol. I · No. 078</span>
+ <span>ESTABLISHED MMXXV · 每日出版</span>
+ <span>GRATIS · 每日精选</span>
+ </div>
+ <div class="paper-name">The Daily Digest</div>
+ <div class="masthead-sub">AI · 科技 · 开发者 · 每日精选</div>
+ <div class="masthead-meta">
+ <span>2026 年 03 月 19 日 · 周四</span>
+ <span class="edition-tag">每日早报</span>
+ <span>⊙ 科技晴好</span>
+ </div>
+ </div>
+
+ <div class="content-area">
+ 
+ <!-- 今日热点 -->
+ <div class="section-header">
+ <div class="thick-rule"></div>
+ <div class="section-title">🔥 今日热点 · Hot Topics</div>
+ <div class="thick-rule"></div>
+ </div>
+ 
+ <div class="hot-topic">
+ <div class="hot-topic-rank">01</div>
+ <div class="hot-topic-content">
+ <h3><a href="https://www.cs.unc.edu/~stotts/COMP590-059-f24/robsrules.html" target="_blank">Rob Pike 编程法则 (1989) 再次刷屏</a></h3>
+ <p>1989 年发布的 Rob Pike 编程法则在 Hacker News 再次引发热议，斩获 870 分。文章总结了五位贝尔实验室计算机科学家的编程经验，包括简洁性、代码性能等核心原则。</p>
+ <div class="source">Hacker News · 870 分</div>
+ </div>
+ </div>
+
+ <!-- 科技要闻 -->
+ <div class="section-header">
+ <div class="thick-rule"></div>
+ <div class="section-title">☰ 今日要闻 · Tech News</div>
+ <div class="thick-rule"></div>
+ </div>
+ <div class="news-grid">
+ 
+ <!-- IT之家新闻 -->
+ <div class="news-item">
+ <div class="news-category">AI动态</div>
+ <div class="news-headline">
+ <a href="https://www.ithome.com/0/930/569.htm" target="_blank">小米认领"Hunter Alpha"神秘模型</a>
+ </div>
+ <div class="news-summary">小米正式认领"Hunter Alpha"，推出 MiMo-V2 系列。罗福莉承诺将开源，并透露内部强推智能体"不用就辞职"的管理理念。</div>
+ <div class="news-byline">IT之家 · 今日</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">AI硬件</div>
+ <div class="news-headline">
+ <a href="https://www.ithome.com/0/930/566.htm" target="_blank">英伟达黄仁勋：Vera CPU 将狂揽数十亿美元</a>
+ </div>
+ <div class="news-summary">英伟达副总裁表示 88 核 Vera CPU 市场需求远超预期，黄仁勋自信预计 CPU 业务将轻松斩获数十亿美元营收。</div>
+ <div class="news-byline">IT之家 · 今日</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">半导体</div>
+ <div class="news-headline">
+ <a href="https://www.ithome.com/0/930/481.htm" target="_blank">ASML 交付 High NA EUV 光刻机</a>
+ </div>
+ <div class="news-summary">ASML 向 imec 交付高数值孔径 EUV 光刻系统，为亚 2nm 中试线提供关键支持，预计 2026 年第 4 季度完成全面认证。</div>
+ <div class="news-byline">IT之家 · 今日</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">手机</div>
+ <div class="news-headline">
+ <a href="https://www.ithome.com/0/930/480.htm" target="_blank">iQOO Z11 系列官宣 3 月 26 日发布</a>
+ </div>
+ <div class="news-summary">iQOO Z11 配备 9020mAh 电池 + 165Hz 护眼屏，iQOO Z11x 搭载 7200mAh 蓝海电池，将于 3 月 26 日发布。</div>
+ <div class="news-byline">IT之家 · 今日</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">科技</div>
+ <div class="news-headline">
+ <a href="https://www.ithome.com/0/930/570.htm" target="_blank">EK 推出 RTX PRO 6000 SE 显卡分体冷头</a>
+ </div>
+ <div class="news-summary">EK 推出适配英伟达 RTX PRO 6000 Blackwell 的分体式水冷冷头，可实现 4U 8GPU 的高密度部署。</div>
+ <div class="news-byline">IT之家 · 今日</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">智能穿戴</div>
+ <div class="news-headline">
+ <a href="https://www.ithome.com/0/930/565.htm" target="_blank">华为 WATCH Ultimate 2 非凡探索"旷野绿"</a>
+ </div>
+ <div class="news-summary">华为官宣 WATCH Ultimate 2 非凡探索"旷野绿"明日预售，3 月 23 日发布，首发海豚声呐通信、北斗卫星语音消息。</div>
+ <div class="news-byline">IT之家 · 今日</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">航天</div>
+ <div class="news-headline">
+ <a href="https://www.ithome.com/0/930/564.htm" target="_blank">美国宇航员完成太空行走</a>
+ </div>
+ <div class="news-summary">NASA 宇航员杰西卡·梅尔与克里斯·威廉姆斯完成国际空间站外部太空行走，历时约 7 小时，为电力系统改造做准备。</div>
+ <div class="news-byline">IT之家 · 今日</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">半导体</div>
+ <div class="news-headline">
+ <a href="https://www.ithome.com/0/930/563.htm" target="_blank">美光确认 HBM4E 基于 1γ DRAM</a>
+ </div>
+ <div class="news-summary">美光确认 HBM4E 基于 1γ 工艺，预计 2027 年量产。1δ 工艺将使用最新 High NA EUV 光刻设备。</div>
+ <div class="news-byline">IT之家 · 今日</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">手机</div>
+ <div class="news-headline">
+ <a href="https://www.ithome.com/0/930/561.htm" target="_blank">万志强：魅族 22 主要平台保持不涨价</a>
+ </div>
+ <div class="news-summary">星纪魅族 CMO 表示魅族 22 在主要平台会保持不涨价，同时透露魅族 22 Air 已取消，Flyme 不再有大版本更新。</div>
+ <div class="news-byline">IT之家 · 今日</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">汽车</div>
+ <div class="news-headline">
+ <a href="https://www.ithome.com/0/930/560.htm" target="_blank">一汽奥迪 A5L 全域智混版上市 32.48 万</a>
+ </div>
+ <div class="news-summary">一汽奥迪 A5L 全域智混版 quattro 正式上市，搭载第五代 EA888 发动机，配备 HDI 双电机全域智混系统。</div>
+ <div class="news-byline">IT之家 · 今日</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">数码</div>
+ <div class="news-headline">
+ <a href="https://www.ithome.com/0/930/559.htm" target="_blank">reMarkable 入门电纸书 Paper Pure 曝光</a>
+ </div>
+ <div class="news-summary">墨水屏品牌 reMarkable 计划推出全新入门级电子墨水屏平板 Paper Pure，主打"纯粹书写"，预计 Q2 发布。</div>
+ <div class="news-byline">IT之家 · 今日</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">智能家居</div>
+ <div class="news-headline">
+ <a href="https://www.ithome.com/0/930/558.htm" target="_blank">小米智能浴霸 G20 上架首发价 709 元</a>
+ </div>
+ <div class="news-summary">小米智能浴霸 G20 上架有品，搭 2800W 石墨烯 PTC 陶瓷制热模块，双直流变频电机，首发价 709 元。</div>
+ <div class="news-byline">IT之家 · 今日</div>
+ </div>
+
+ <!-- Hacker News -->
+ <div class="news-item">
+ <div class="news-category">开源项目</div>
+ <div class="news-headline">
+ <a href="https://openrocket.info/" target="_blank">OpenRocket 开源火箭模拟器</a>
+ </div>
+ <div class="news-summary">免费开源的火箭模拟器，帮助爱好者设计和测试火箭模型，已获得 441 分数。</div>
+ <div class="news-byline">Hacker News · 441 分</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">AI工具</div>
+ <div class="news-headline">
+ <a href="https://github.com/NVIDIA/NemoClaw" target="_blank">Nvidia NemoClaw 发布</a>
+ </div>
+ <div class="news-summary">NVIDIA 官方插件，用于安全安装 OpenClaw，获得 260 分数。</div>
+ <div class="news-byline">Hacker News · 260 分</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">AI硬件</div>
+ <div class="news-headline">
+ <a href="https://gitlab.com/IsolatedOctopi/nvidia_greenboost" target="_blank">Nvidia greenboost 扩展 GPU VRAM</a>
+ </div>
+ <div class="news-summary">Nvidia 发布 greenboost，可使用系统 RAM/NVMe 透明扩展 GPU VRAM，获得 197 分数。</div>
+ <div class="news-byline">Hacker News · 197 分</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">AI研究</div>
+ <div class="news-headline">
+ <a href="https://susam.net/wander/" target="_blank">Wander 去中心化网络工具</a>
+ </div>
+ <div class="news-summary">开源的去中心化小网络探索工具，帮助用户发现独立博客和个人网站，获得 229 分数。</div>
+ <div class="news-byline">Hacker News · 229 分</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">AI研究</div>
+ <div class="news-headline">
+ <a href="https://www.quantamagazine.org/the-math-that-explains-why-bell-curves-are-everywhere-20260316/" target="_blank">为什么正态分布无处不在</a>
+ </div>
+ <div class="news-summary">Quanta Magazine 深度解析数学原理，探讨为什么正态分布在自然界和数据分析中如此普遍。</div>
+ <div class="news-byline">Hacker News · 78 分</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">AI研究</div>
+ <div class="news-headline">
+ <a href="https://mlbenchmarks.org/00-preface.html" target="_blank">机器学习基准测试新书</a>
+ </div>
+ <div class="news-summary">一本关于机器学习基准测试的新书，探讨如何科学评估 AI 模型性能。</div>
+ <div class="news-byline">Hacker News · 97 分</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">AI研究</div>
+ <div class="news-headline">
+ <a href="https://nearzero.software/p/warranty-void-if-regenerated" target="_blank">Warranty Void If Regenerated</a>
+ </div>
+ <div class="news-summary">探讨再生医学与保修条款的法律与技术问题，获得 224 分数。</div>
+ <div class="news-byline">Hacker News · 224 分</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-category">AI研究</div>
+ <div class="news-headline">
+ <a href="https://www.pew.org/en/research-and-analysis/articles/2026/03/18/austins-surge-of-new-housing-construction-drove-down-rents" target="_blank">奥斯汀新住房建设导致租金下降</a>
+ </div>
+ <div class="news-summary">Pew 研究报告指出奥斯汀大量新建住房导致租金下降，为住房供应与租金关系提供数据支持。</div>
+ <div class="news-byline">Hacker News · 364 分</div>
+ </div>
+
+ </div>
+
+ </div>
+
+ <div class="newspaper-footer">
+ <span>The Daily Digest · 每日科技要闻</span>
+ <span>生成时间：11:46</span>
+ <span>Powered by OpenClaw</span>
+ </div>
+</div>
+
+</body>
+</html>
