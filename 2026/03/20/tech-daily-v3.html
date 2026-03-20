@@ -437,7 +437,7 @@
   </div>
 
   <!-- LOADING -->
-  <div class="loading-section" id="loading" style="display:none" style="display:none">
+  <div class="loading-section" id="loading" style="display:none">
     <div class="loading-press">正在排版印刷中……</div>
     <div class="press-anim">
       <div class="press-dot"></div>
@@ -448,7 +448,7 @@
   </div>
 
   <!-- CONTENT -->
-  <div class="content-area visible" class="visible">
+  <div class="content-area" id="content" class="visible">
     
     <!-- GITHUB TRENDING -->
     <div class="section-header">
@@ -456,190 +456,43 @@
       <div class="section-title">⬡ GitHub 开源风云榜 · Trending Repositories</div>
       <div class="thick-rule"></div>
     </div>
-    <div class="trending-grid" id="trending-grid"><div class="trending-item">
-<div class="trending-rank">01</div>
-<div class="trending-body">
-<div class="trending-author">666ghj</div>
-<a class="trending-name" href="https://github.com/666ghj/MiroFish" target="_blank">MiroFish</a>
-<div class="trending-desc">简洁通用的群体智能引擎，预测万物</div>
-<div class="trending-meta">
-<span>★ 35.9K</span>
-<span>📈 17.6K/周</span>
-<span>Python</span>
-</div>
-</div>
-</div>
-<div class="trending-item">
-<div class="trending-rank">02</div>
-<div class="trending-body">
-<div class="trending-author">msitarzewski</div>
-<a class="trending-name" href="https://github.com/msitarzewski/agency-agents" target="_blank">agency-agents</a>
-<div class="trending-desc">完整的 AI 代理工具箱</div>
-<div class="trending-meta">
-<span>★ 55.5K</span>
-<span>📈 23.2K/周</span>
-<span>Shell</span>
-</div>
-</div>
-</div>
-<div class="trending-item">
-<div class="trending-rank">03</div>
-<div class="trending-body">
-<div class="trending-author">microsoft</div>
-<a class="trending-name" href="https://github.com/microsoft/BitNet" target="_blank">BitNet</a>
-<div class="trending-desc">1位 LLM 推理框架</div>
-<div class="trending-meta">
-<span>★ 35.9K</span>
-<span>📈 4.8K/周</span>
-<span>Python</span>
-</div>
-</div>
-</div>
-<div class="trending-item">
-<div class="trending-rank">04</div>
-<div class="trending-body">
-<div class="trending-author">volcengine</div>
-<a class="trending-name" href="https://github.com/volcengine/OpenViking" target="_blank">OpenViking</a>
-<div class="trending-desc">开源上下文数据库，专为 AI Agent 设计</div>
-<div class="trending-meta">
-<span>★ 16.4K</span>
-<span>📈 10.2K/周</span>
-<span>Python</span>
-</div>
-</div>
-</div>
-<div class="trending-item">
-<div class="trending-rank">05</div>
-<div class="trending-body">
-<div class="trending-author">obra</div>
-<a class="trending-name" href="https://github.com/obra/superpowers" target="_blank">superpowers</a>
-<div class="trending-desc">Agent 技能框架与开发方法论</div>
-<div class="trending-meta">
-<span>★ 99.2K</span>
-<span>📈 19.2K/周</span>
-<span>Shell</span>
-</div>
-</div>
-</div>
-<div class="trending-item">
-<div class="trending-rank">06</div>
-<div class="trending-body">
-<div class="trending-author">alibaba</div>
-<a class="trending-name" href="https://github.com/alibaba/page-agent" target="_blank">page-agent</a>
-<div class="trending-desc">JavaScript 页面 GUI 代理，自然语言控制网页</div>
-<div class="trending-meta">
-<span>★ 11.8K</span>
-<span>📈 6.2K/周</span>
-<span>TypeScript</span>
-</div>
-</div>
-</div>
-<div class="trending-item">
-<div class="trending-rank">07</div>
-<div class="trending-body">
-<div class="trending-author">promptfoo</div>
-<a class="trending-name" href="https://github.com/promptfoo/promptfoo" target="_blank">promptfoo</a>
-<div class="trending-desc">测试 prompts、agents 和 RAGs</div>
-<div class="trending-meta">
-<span>★ 17.7K</span>
-<span>📈 4.8K/周</span>
-<span>TypeScript</span>
-</div>
-</div>
-</div>
-<div class="trending-item">
-<div class="trending-rank">08</div>
-<div class="trending-body">
-<div class="trending-author">fishaudio</div>
-<a class="trending-name" href="https://github.com/fishaudio/fish-speech" target="_blank">fish-speech</a>
-<div class="trending-desc">SOTA 开源 TTS</div>
-<div class="trending-meta">
-<span>★ 28.3K</span>
-<span>📈 2.2K/周</span>
-<span>Python</span>
-</div>
-</div>
-</div>
-<div class="trending-item">
-<div class="trending-rank">09</div>
-<div class="trending-body">
-<div class="trending-author">shareAI-lab</div>
-<a class="trending-name" href="https://github.com/shareAI-lab/learn-claude-code" target="_blank">learn-claude-code</a>
-<div class="trending-desc">从零构建 Claude Code 风格 agent</div>
-<div class="trending-meta">
-<span>★ 33.7K</span>
-<span>📈 7.8K/周</span>
-<span>TypeScript</span>
-</div>
-</div>
-</div></div>
- <!-- NEWS SECTION -->
+    <div class="trending-grid" id="trending-grid">
+      <!-- Filled by JS -->
+    </div>
+
+    <!-- NEWS SECTION -->
     <div class="section-header" style="margin-top:28px">
       <div class="thick-rule"></div>
       <div class="section-title">☰ AI · 开源 · 开发者要闻</div>
       <div class="thick-rule"></div>
     </div>
-    <div class="news-columns" id="news-columns"><div class="news-item">
-<div class="news-category">Hacker News</div>
-<div class="news-headline"><a href="https://code.claude.com/docs/en/channels" target="_blank">Claude Code 推出 Channels 功能</a></div>
-<div class="news-summary">104 points · jasonjmcghee</div>
-<div class="news-byline">Hacker News · 今日</div>
-</div>
-<div class="news-item">
-<div class="news-category">Hacker News</div>
-<div class="news-headline"><a href="https://omar.yt/posts/wayland-set-the-linux-desktop-back-by-10-years" target="_blank">Wayland 让 Linux 桌面倒退 10 年</a></div>
-<div class="news-summary">98 points · omarroth</div>
-<div class="news-byline">Hacker News · 今日</div>
-</div>
-<div class="news-item">
-<div class="news-category">Hacker News</div>
+    <div class="news-columns" id="news-columns"><div class="news-item"><div class="news-category">Hacker News</div>
 <div class="news-headline"><a href="https://astral.sh/blog/openai" target="_blank">Astral 团队宣布加入 OpenAI</a></div>
-<div class="news-summary">1210 points · ibraheemdev</div>
-<div class="news-byline">Hacker News · 今日</div>
-</div>
-<div class="news-item">
-<div class="news-category">Hacker News</div>
+<div class="news-summary">1206 points</div>
+<div class="news-byline">Hacker News · 今日</div></div>
+<div class="news-item"><div class="news-category">Hacker News</div>
 <div class="news-headline"><a href="https://arstechnica.com/gadgets/2026/03/google-details-new-24-hour-process-to-sideload-unverified-android-apps/" target="_blank">谷歌推侧载未验证 App 新流程</a></div>
-<div class="news-summary">489 points · 0xedb</div>
-<div class="news-byline">Hacker News · 今日</div>
-</div>
-<div class="news-item">
-<div class="news-category">Hacker News</div>
-<div class="news-headline"><a href="https://github.com/cockpit-project/cockpit" target="_blank">Cockpit：服务器 Web 管理界面</a></div>
-<div class="news-summary">165 points · modinfo</div>
-<div class="news-byline">Hacker News · 今日</div>
-</div>
-<div class="news-item">
-<div class="news-category">IT之家</div>
-<div class="news-headline"><a href="https://www.ithome.com/0/930/854.htm" target="_blank">请装 3 月 Win11 更新：高危注册表漏洞被修复，黑客利用能掌控你的电脑</a></div>
+<div class="news-summary">476 points</div>
+<div class="news-byline">Hacker News · 今日</div></div>
+<div class="news-item"><div class="news-category">Hacker News</div>
+<div class="news-headline"><a href="https://code.claude.com/docs/en/channels" target="_blank">Claude Code 推出 Channels 功能</a></div>
+<div class="news-summary">85 points</div>
+<div class="news-byline">Hacker News · 今日</div></div>
+<div class="news-item"><div class="news-category">IT之家</div>
+<div class="news-headline"><a href="https://www.ithome.com/0/930/848.htm" target="_blank">OPPO Pad mini 小平板曝光</a></div>
 <div class="news-summary">IT之家资讯</div>
-<div class="news-byline">IT之家 · 今日</div>
-</div>
-<div class="news-item">
-<div class="news-category">IT之家</div>
-<div class="news-headline"><a href="https://www.ithome.com/0/930/853.htm" target="_blank">华为 MatePad Edge 鸿蒙二合一平板新增 24GB+1TB 液冷版：搭载海思麒麟 X90，9499 元</a></div>
+<div class="news-byline">IT之家 · 今日</div></div>
+<div class="news-item"><div class="news-category">IT之家</div>
+<div class="news-headline"><a href="https://www.ithome.com/0/930/846.htm" target="_blank">华为 Mate 80 Pro Max 风驰版开启预订</a></div>
 <div class="news-summary">IT之家资讯</div>
-<div class="news-byline">IT之家 · 今日</div>
-</div>
-<div class="news-item">
-<div class="news-category">IT之家</div>
-<div class="news-headline"><a href="https://www.ithome.com/0/930/852.htm" target="_blank">ARCTIC 升级桌下式无风扇被动散热迷你主机，带来 Senza AI 370</a></div>
-<div class="news-summary">IT之家资讯</div>
-<div class="news-byline">IT之家 · 今日</div>
-</div>
-<div class="news-item">
-<div class="news-category">IT之家</div>
-<div class="news-headline"><a href="https://www.ithome.com/0/930/851.htm" target="_blank">2026 年度 Steam 春季特卖活动开启：《无人深空》《森林之子》等多款游戏迎折扣</a></div>
-<div class="news-summary">IT之家资讯</div>
-<div class="news-byline">IT之家 · 今日</div>
-</div></div>
+<div class="news-byline">IT之家 · 今日</div></div></div>
  <button class="refresh-btn" onclick="loadAll()">↻ 重新印刷今日报纸</button>
   </div>
 
   <!-- FOOTER -->
   <div class="newspaper-footer">
     <span>The Daily Digest · AI 智能采编</span>
-    <span id="gen-time">生成时间：09:25</span>
+    <span id="gen-time">生成时间：09:31</span>
     <span>Powered by Claude · Anthropic</span>
   </div>
 </div>
