@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub 开源日报 · The Daily</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Noto+Serif+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+ :root {
+ --ink: #1a1208;
+ --ink-light: #3d2f1a;
+ --paper: #f5f0e8;
+ --paper-dark: #ede6d5;
+ --rule: #2a1f0e;
+ --accent: #8b1a1a;
+ --gray: #6b5c45;
+ --light-gray: #c8b99a;
+ }
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ body {
+ background: #d4c9b0;
+ font-family: 'Noto Serif SC', serif;
+ color: var(--ink);
+ min-height: 100vh;
+ padding: 20px;
+ }
+
+ .newspaper {
+ max-width: 1100px;
+ margin: 0 auto;
+ background: var(--paper);
+ box-shadow: 4px 4px 20px rgba(0,0,0,0.35);
+ position: relative;
+ overflow: hidden;
+ }
+
+ .newspaper::before {
+ content: '';
+ position: absolute;
+ inset: 0;
+ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+ pointer-events: none;
+ z-index: 10;
+ opacity: 0.6;
+ }
+
+ /* MASTHEAD */
+ .masthead {
+ padding: 16px 40px 0;
+ border-bottom: 3px double var(--rule);
+ }
+
+ .masthead-top {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ font-size: 11px;
+ color: var(--gray);
+ letter-spacing: 0.05em;
+ padding-bottom: 8px;
+ border-bottom: 1px solid var(--rule);
+ margin-bottom: 8px;
+ }
+
+ .paper-name {
+ font-family: 'Playfair Display', serif;
+ font-size: clamp(28px, 5vw, 48px);
+ text-align: center;
+ line-height: 1.1;
+ color: var(--ink);
+ font-weight: 900;
+ letter-spacing: -1px;
+ padding: 8px 0 12px;
+ }
+
+ .masthead-sub {
+ text-align: center;
+ font-family: 'Playfair Display', serif;
+ font-style: italic;
+ font-size: 13px;
+ color: var(--gray);
+ letter-spacing: 0.15em;
+ padding-bottom: 12px;
+ }
+
+ .masthead-meta {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ font-size: 11px;
+ color: var(--ink-light);
+ padding: 6px 0 10px;
+ border-top: 1px solid var(--rule);
+ }
+
+ .edition-tag {
+ background: var(--ink);
+ color: var(--paper);
+ padding: 2px 8px;
+ font-size: 10px;
+ letter-spacing: 0.12em;
+ text-transform: uppercase;
+ }
+
+ /* CONTENT AREA */
+ .content-area {
+ padding: 0 40px 40px;
+ position: relative;
+ z-index: 5;
+ }
+
+ /* SECTION HEADERS */
+ .section-header {
+ margin: 28px 0 16px;
+ text-align: center;
+ position: relative;
+ }
+
+ .section-header::before,
+ .section-header::after {
+ content: '';
+ display: block;
+ height: 1px;
+ background: var(--rule);
+ }
+ .section-header::before { margin-bottom: 6px; }
+ .section-header::after { margin-top: 6px; }
+
+ .section-title {
+ font-family: 'Playfair Display', serif;
+ font-size: 11px;
+ font-weight: 700;
+ letter-spacing: 0.35em;
+ text-transform: uppercase;
+ color: var(--ink);
+ display: inline-block;
+ padding: 0 14px;
+ background: var(--paper);
+ position: relative;
+ z-index: 1;
+ }
+
+ .thick-rule {
+ height: 3px;
+ background: var(--rule);
+ margin: 4px 0;
+ }
+
+ /* GRID — 3 columns */
+ .item-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 0;
+ border: 1px solid var(--rule);
+ }
+
+ .grid-item {
+ padding: 14px 16px;
+ border-right: 1px solid var(--light-gray);
+ border-bottom: 1px solid var(--light-gray);
+ transition: background 0.2s;
+ }
+
+ .grid-item:hover { background: var(--paper-dark); }
+ .grid-item:nth-child(3n) { border-right: none; }
+ .grid-item:nth-last-child(-n+3) { border-bottom: none; }
+
+ .item-rank {
+ font-family: 'Playfair Display', serif;
+ font-size: 26px;
+ font-weight: 900;
+ color: var(--light-gray);
+ line-height: 1;
+ float: left;
+ margin-right: 10px;
+ margin-top: 2px;
+ }
+
+ .item-title {
+ font-family: 'Playfair Display', serif;
+ font-weight: 700;
+ font-size: 14px;
+ color: var(--ink);
+ text-decoration: none;
+ display: block;
+ line-height: 1.3;
+ }
+
+ .item-title:hover { color: var(--accent); }
+
+ .item-meta {
+ font-size: 10px;
+ color: var(--gray);
+ margin-bottom: 4px;
+ }
+
+ .item-desc {
+ font-size: 11px;
+ color: var(--ink-light);
+ line-height: 1.5;
+ margin-top: 4px;
+ display: -webkit-box;
+ -webkit-line-clamp: 2;
+ -webkit-box-orient: vertical;
+ overflow: hidden;
+ }
+
+ .item-stats {
+ margin-top: 8px;
+ display: flex;
+ gap: 12px;
+ font-size: 10px;
+ color: var(--gray);
+ }
+
+ .item-stats .stars {
+ color: var(--accent);
+ font-weight: 600;
+ }
+
+ /* NEWS COLUMNS */
+ .news-columns {
+ column-count: 3;
+ column-gap: 0;
+ column-rule: 1px solid var(--light-gray);
+ border: 1px solid var(--rule);
+ border-top: none;
+ }
+
+ .news-item {
+ break-inside: avoid;
+ padding: 12px 16px;
+ border-bottom: 1px solid var(--light-gray);
+ }
+
+ .news-category {
+ font-family: 'Playfair Display', serif;
+ font-size: 8px;
+ font-weight: 700;
+ letter-spacing: 0.2em;
+ text-transform: uppercase;
+ color: var(--accent);
+ margin-bottom: 3px;
+ }
+
+ .news-headline {
+ font-family: 'Playfair Display', serif;
+ font-size: 13px;
+ font-weight: 700;
+ line-height: 1.3;
+ margin-bottom: 4px;
+ }
+
+ .news-headline a {
+ color: var(--ink);
+ text-decoration: none;
+ }
+
+ .news-headline a:hover { color: var(--accent); }
+
+ .news-summary {
+ font-size: 11px;
+ line-height: 1.6;
+ color: var(--ink-light);
+ }
+
+ .news-byline {
+ font-size: 9px;
+ color: var(--gray);
+ font-style: italic;
+ margin-top: 4px;
+ }
+
+ /* FOOTER */
+ .newspaper-footer {
+ border-top: 3px double var(--rule);
+ padding: 10px 40px;
+ display: flex;
+ justify-content: space-between;
+ font-size: 10px;
+ color: var(--gray);
+ position: relative;
+ z-index: 5;
+ }
+
+ .newspaper-footer a {
+ color: var(--accent);
+ text-decoration: none;
+ }
+
+ @media (max-width: 768px) {
+ body { padding: 10px; }
+ .masthead { padding: 12px 20px 0; }
+ .content-area { padding: 0 20px 30px; }
+ .item-grid { grid-template-columns: 1fr 1fr; }
+ .news-columns { column-count: 1; }
+ .newspaper-footer { padding: 10px 20px; flex-direction: column; text-align: center; gap: 8px; }
+ }
+</style>
+</head>
+<body>
+
+<div class="newspaper">
+ <!-- MASTHEAD -->
+ <div class="masthead">
+ <div class="masthead-top">
+ <span>Vol. I · No. {{ISSUE_NUM}}</span>
+ <span>ESTABLISHED 2026 · 每日出版</span>
+ <span>GRATIS · {{TAGLINE}}</span>
+ </div>
+ <div class="paper-name">GitHub 开源日报</div>
+ <div class="masthead-sub">Trending Repositories · 每日热门项目</div>
+ <div class="masthead-meta">
+ <span>2026 年 03 月 20 日</span>
+ <span class="edition-tag">{{EDITION}}</span>
+ <span>{{WEATHER}}</span>
+ </div>
+ </div>
+
+ <!-- CONTENT -->
+ <div class="content-area">
+ 
+ <!-- SECTION 1: GRID -->
+ <div class="section-header">
+ <div class="thick-rule"></div>
+ <div class="section-title">⬡ 今日热门项目</div>
+ <div class="thick-rule"></div>
+ </div>
+ <div class="item-grid">
+ 
+        <div class="grid-item">
+            <div class="item-rank">01</div>
+            <div>
+                <div class="item-meta">ElielNascimento</div>
+                <a class="item-title" href="https://github.com/ElielNascimento/git-eng5s-A" target="_blank">git-eng5s-A</a>
+                <div class="item-desc">暂无描述</div>
+                <div class="item-stats">
+                    <span class="stars">★ 4</span>
+                    <span>Unknown</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">02</div>
+            <div>
+                <div class="item-meta">Its-JrDev</div>
+                <a class="item-title" href="https://github.com/Its-JrDev/riwi-to-do-manager" target="_blank">riwi-to-do-manager</a>
+                <div class="item-desc">暂无描述</div>
+                <div class="item-stats">
+                    <span class="stars">★ 3</span>
+                    <span>Unknown</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">03</div>
+            <div>
+                <div class="item-meta">umutcamliyurt</div>
+                <a class="item-title" href="https://github.com/umutcamliyurt/Praesidium" target="_blank">Praesidium</a>
+                <div class="item-desc">An Android physical security tool</div>
+                <div class="item-stats">
+                    <span class="stars">★ 2</span>
+                    <span>Java</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">04</div>
+            <div>
+                <div class="item-meta">sebclawops</div>
+                <a class="item-title" href="https://github.com/sebclawops/project-loop-skill" target="_blank">project-loop-skill</a>
+                <div class="item-desc">Lean project orchestration skill for OpenClaw</div>
+                <div class="item-stats">
+                    <span class="stars">★ 2</span>
+                    <span>Unknown</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">05</div>
+            <div>
+                <div class="item-meta">cmubig</div>
+                <a class="item-title" href="https://github.com/cmubig/MOSAIC" target="_blank">MOSAIC</a>
+                <div class="item-desc">Official inference release for: MOSAIC: Generating Consistent, Privacy-Preservin</div>
+                <div class="item-stats">
+                    <span class="stars">★ 2</span>
+                    <span>Python</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">06</div>
+            <div>
+                <div class="item-meta">StanLiveOps</div>
+                <a class="item-title" href="https://github.com/StanLiveOps/trainingsim" target="_blank">trainingsim</a>
+                <div class="item-desc">simulator for training live ops</div>
+                <div class="item-stats">
+                    <span class="stars">★ 2</span>
+                    <span>HTML</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">07</div>
+            <div>
+                <div class="item-meta">5771323yang</div>
+                <a class="item-title" href="https://github.com/5771323yang/ZVycIKzIoX" target="_blank">ZVycIKzIoX</a>
+                <div class="item-desc">【Java计算机毕业设计分享】基于SpringBoot的药材店铺管理系统设计与实现，MySQL Java开发 毕业设计 实战项目【附源码、文档报告、代码讲解】</div>
+                <div class="item-stats">
+                    <span class="stars">★ 1</span>
+                    <span>Unknown</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">08</div>
+            <div>
+                <div class="item-meta">3886370410</div>
+                <a class="item-title" href="https://github.com/3886370410/hpcGMSnTWP" target="_blank">hpcGMSnTWP</a>
+                <div class="item-desc">【Python计算机毕业设计分享】基于深度学习YOLO11电动车骑行规范识别系统，MySQL Python开发 毕业设计 实战项目【附源码、文档报告、代码讲解】</div>
+                <div class="item-stats">
+                    <span class="stars">★ 1</span>
+                    <span>Unknown</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">09</div>
+            <div>
+                <div class="item-meta">DeutschlandNotReal</div>
+                <a class="item-title" href="https://github.com/DeutschlandNotReal/Perekop" target="_blank">Perekop</a>
+                <div class="item-desc">暂无描述</div>
+                <div class="item-stats">
+                    <span class="stars">★ 1</span>
+                    <span>C++</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">10</div>
+            <div>
+                <div class="item-meta">3886370410</div>
+                <a class="item-title" href="https://github.com/3886370410/ByMbfiWShf" target="_blank">ByMbfiWShf</a>
+                <div class="item-desc">【Java计算机毕业设计分享】基于SPIMI的新闻搜索引擎系统（源码+论文），MySQL Java开发 毕业设计 实战项目【附源码、文档报告、代码讲解】</div>
+                <div class="item-stats">
+                    <span class="stars">★ 1</span>
+                    <span>Unknown</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">11</div>
+            <div>
+                <div class="item-meta">P0n40</div>
+                <a class="item-title" href="https://github.com/P0n40/Prince-of-Persia-Warrior-Within-Trainer-Release" target="_blank">Prince-of-Persia-Warrior-Within-Trainer-Release</a>
+                <div class="item-desc">Release repository for Prince of Persia: Warrior Within Trainer +15 by mul0 (v1.</div>
+                <div class="item-stats">
+                    <span class="stars">★ 1</span>
+                    <span>Unknown</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">12</div>
+            <div>
+                <div class="item-meta">isso-1909</div>
+                <a class="item-title" href="https://github.com/isso-1909/Weather_App" target="_blank">Weather_App</a>
+                <div class="item-desc">my Weather App</div>
+                <div class="item-stats">
+                    <span class="stars">★ 1</span>
+                    <span>JavaScript</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">13</div>
+            <div>
+                <div class="item-meta">joelhooks</div>
+                <a class="item-title" href="https://github.com/joelhooks/pi-skill-interpolation" target="_blank">pi-skill-interpolation</a>
+                <div class="item-desc">⚡ pi extension for dynamic shell interpolation in skills — !\ syntax, gated on a</div>
+                <div class="item-stats">
+                    <span class="stars">★ 1</span>
+                    <span>TypeScript</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">14</div>
+            <div>
+                <div class="item-meta">5771323yang</div>
+                <a class="item-title" href="https://github.com/5771323yang/EJjJSrGeZj" target="_blank">EJjJSrGeZj</a>
+                <div class="item-desc">【Java计算机毕业设计分享】基于YOLO+深度学习的安全背心穿戴检测平台，MySQL Java开发 毕业设计 实战项目【附源码、文档报告、代码讲解】</div>
+                <div class="item-stats">
+                    <span class="stars">★ 1</span>
+                    <span>Unknown</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <div class="item-rank">15</div>
+            <div>
+                <div class="item-meta">jannatgarg2005</div>
+                <a class="item-title" href="https://github.com/jannatgarg2005/SwachhBuddy" target="_blank">SwachhBuddy</a>
+                <div class="item-desc">It is an Sustainable Development app comprised of various features/abilities</div>
+                <div class="item-stats">
+                    <span class="stars">★ 1</span>
+                    <span>TypeScript</span>
+                </div>
+            </div>
+        </div>
+ </div>
+
+ <!-- SECTION 2: NEWS COLUMNS -->
+ <div class="section-header" style="margin-top:28px">
+ <div class="thick-rule"></div>
+ <div class="section-title"></div>
+ <div class="thick-rule"></div>
+ </div>
+ <div class="news-columns">
+ 
+ </div>
+
+ <!-- SECTION 3: NEWS COLUMNS (optional) -->
+ 
+
+ </div>
+
+ <!-- FOOTER -->
+ <div class="newspaper-footer">
+ <span>GitHub 开源日报 · 太子自动生成</span>
+ <span>更新时间：2026 年 03 月 20 日</span>
+ <span><a href="https://github.com/trending" target="_blank">查看 GitHub Trending</a></span>
+ </div>
+</div>
+
+</body>
+</html>
