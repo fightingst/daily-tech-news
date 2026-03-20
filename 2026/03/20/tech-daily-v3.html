@@ -437,7 +437,7 @@
   </div>
 
   <!-- LOADING -->
-  <div class="loading-section" id="loading" style="display:none">
+  <div class="loading-section" id="loading" style="display:none" style="display:none">
     <div class="loading-press">正在排版印刷中……</div>
     <div class="press-anim">
       <div class="press-dot"></div>
@@ -582,25 +582,25 @@
     <div class="news-columns" id="news-columns"><div class="news-item">
 <div class="news-category">Hacker News</div>
 <div class="news-headline"><a href="https://code.claude.com/docs/en/channels" target="_blank">Claude Code 推出 Channels 功能</a></div>
-<div class="news-summary">101 points · jasonjmcghee</div>
+<div class="news-summary">104 points · jasonjmcghee</div>
 <div class="news-byline">Hacker News · 今日</div>
 </div>
 <div class="news-item">
 <div class="news-category">Hacker News</div>
 <div class="news-headline"><a href="https://omar.yt/posts/wayland-set-the-linux-desktop-back-by-10-years" target="_blank">Wayland 让 Linux 桌面倒退 10 年</a></div>
-<div class="news-summary">91 points · omarroth</div>
+<div class="news-summary">98 points · omarroth</div>
 <div class="news-byline">Hacker News · 今日</div>
 </div>
 <div class="news-item">
 <div class="news-category">Hacker News</div>
 <div class="news-headline"><a href="https://astral.sh/blog/openai" target="_blank">Astral 团队宣布加入 OpenAI</a></div>
-<div class="news-summary">1208 points · ibraheemdev</div>
+<div class="news-summary">1210 points · ibraheemdev</div>
 <div class="news-byline">Hacker News · 今日</div>
 </div>
 <div class="news-item">
 <div class="news-category">Hacker News</div>
 <div class="news-headline"><a href="https://arstechnica.com/gadgets/2026/03/google-details-new-24-hour-process-to-sideload-unverified-android-apps/" target="_blank">谷歌推侧载未验证 App 新流程</a></div>
-<div class="news-summary">487 points · 0xedb</div>
+<div class="news-summary">489 points · 0xedb</div>
 <div class="news-byline">Hacker News · 今日</div>
 </div>
 <div class="news-item">
@@ -611,7 +611,13 @@
 </div>
 <div class="news-item">
 <div class="news-category">IT之家</div>
-<div class="news-headline"><a href="https://www.ithome.com/0/930/853.htm" target="_blank">华为 MatePad Edge 鸿蒙二合一平板新增 24GB+1TB 液冷版：搭载海思麒麟 X90，</a></div>
+<div class="news-headline"><a href="https://www.ithome.com/0/930/854.htm" target="_blank">请装 3 月 Win11 更新：高危注册表漏洞被修复，黑客利用能掌控你的电脑</a></div>
+<div class="news-summary">IT之家资讯</div>
+<div class="news-byline">IT之家 · 今日</div>
+</div>
+<div class="news-item">
+<div class="news-category">IT之家</div>
+<div class="news-headline"><a href="https://www.ithome.com/0/930/853.htm" target="_blank">华为 MatePad Edge 鸿蒙二合一平板新增 24GB+1TB 液冷版：搭载海思麒麟 X90，9499 元</a></div>
 <div class="news-summary">IT之家资讯</div>
 <div class="news-byline">IT之家 · 今日</div>
 </div>
@@ -626,12 +632,6 @@
 <div class="news-headline"><a href="https://www.ithome.com/0/930/851.htm" target="_blank">2026 年度 Steam 春季特卖活动开启：《无人深空》《森林之子》等多款游戏迎折扣</a></div>
 <div class="news-summary">IT之家资讯</div>
 <div class="news-byline">IT之家 · 今日</div>
-</div>
-<div class="news-item">
-<div class="news-category">IT之家</div>
-<div class="news-headline"><a href="https://www.ithome.com/0/930/850.htm" target="_blank">vivo X300s 手机跑分曝光：天玑 9500 芯片，16GB 内存</a></div>
-<div class="news-summary">IT之家资讯</div>
-<div class="news-byline">IT之家 · 今日</div>
 </div></div>
  <button class="refresh-btn" onclick="loadAll()">↻ 重新印刷今日报纸</button>
   </div>
@@ -644,172 +644,6 @@
   </div>
 </div>
 
-<script>
-// ─── DATE SETUP ───────────────────────────────────────
-function setupDate() {
-  const now = new Date();
-  const y = now.getFullYear(), m = now.getMonth()+1, d = now.getDate();
-  document.getElementById('date-display').textContent =
-    `${y} 年 ${String(m).padStart(2,'0')} 月 ${String(d).padStart(2,'0')} 日 · ${['周日','周一','周二','周三','周四','周五','周六'][now.getDay()]}`;
-  document.getElementById('issue-num').textContent =
-    String(Math.floor((now - new Date(2025,0,1))/86400000)+1).padStart(3,'0');
-  document.getElementById('gen-time').textContent =
-    `生成时间：${now.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})}`;
-}
 
-// ─── API CALL ─────────────────────────────────────────
-async function callClaude(prompt, statusMsg) {
-  document.getElementById('loading-status').textContent = statusMsg;
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-      messages: [{ role: 'user', content: prompt }]
-    })
-  });
-  const data = await res.json();
-  // Extract text from all content blocks
-  return data.content
-    .filter(b => b.type === 'text')
-    .map(b => b.text)
-    .join('');
-}
-
-// ─── PARSE JSON SAFELY ───────────────────────────────
-function parseJSON(text) {
-  const clean = text.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
-  const start = clean.indexOf('[') !== -1 ? clean.indexOf('[') : clean.indexOf('{');
-  const end = clean.lastIndexOf(']') !== -1 && clean.indexOf('[') !== -1
-    ? clean.lastIndexOf(']')
-    : clean.lastIndexOf('}');
-  return JSON.parse(clean.slice(start, end+1));
-}
-
-// ─── RENDER TRENDING ─────────────────────────────────
-function renderTrending(items) {
-  const grid = document.getElementById('trending-grid');
-  grid.innerHTML = items.slice(0,9).map((r, i) => `
-    <div class="trending-item">
-      <div class="trending-rank">${String(i+1).padStart(2,'0')}</div>
-      <div class="trending-body">
-        <div class="trending-author">${r.author || ''}</div>
-        <a class="trending-name" href="${r.url || '#'}" target="_blank">${r.name}</a>
-        <div class="trending-desc">${r.description || '暂无描述'}</div>
-        <div class="trending-meta">
-          <span>★ ${r.stars || '—'}</span>
-          <span>${r.language || ''}</span>
-          ${r.todayStars ? `<span>↑ ${r.todayStars} 今日</span>` : ''}
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-// ─── RENDER NEWS ─────────────────────────────────────
-function renderNews(items) {
-  const col = document.getElementById('news-columns');
-  col.innerHTML = items.map((n, i) => `
-    <div class="news-item ${i===0 ? 'lead' : ''}">
-      <div class="news-category">${n.category || '科技'}</div>
-      <div class="news-headline">
-        <a href="${n.url || '#'}" target="_blank">${n.title}</a>
-      </div>
-      <div class="news-summary">${n.summary}</div>
-      <div class="news-byline">${n.source || 'AI 编辑整理'} · ${n.time || '今日'}</div>
-    </div>
-  `).join('');
-}
-
-// ─── MAIN LOADER ─────────────────────────────────────
-async function loadAll() {
-  document.getElementById('loading').style.display = 'block';
-  document.getElementById('content').classList.remove('visible');
-  setupDate();
-
-  try {
-    // 1. GitHub Trending
-    const trendingRaw = await callClaude(
-      `Search GitHub trending today and return ONLY a JSON array (no markdown, no explanation) of the top 9 trending repositories.
-Each object must have: name (repo name only), author (github username), description (brief, in Chinese if possible), url (full github url), stars (total star count as string), language, todayStars (stars gained today as string).
-Return only valid JSON array like: [{"name":"...","author":"...","description":"...","url":"...","stars":"...","language":"...","todayStars":"..."}]`,
-      '正在检索 GitHub 今日热门项目……'
-    );
-
-    let trendingItems;
-    try {
-      trendingItems = parseJSON(trendingRaw);
-    } catch(e) {
-      trendingItems = generateFallbackTrending();
-    }
-    renderTrending(trendingItems);
-
-    // 2. Tech News
-    const newsRaw = await callClaude(
-      `Search for today's most important news (March 2026) focused ONLY on these two areas:
-1. AI & Tech: LLM releases, AI research breakthroughs, AI products, model benchmarks, AI companies
-2. Open Source & Developer: GitHub projects, dev tools, programming languages, frameworks, CLI tools, developer ecosystems
-
-Return ONLY a JSON array (no markdown, no explanation) of 9 news items — mix roughly 5 AI/Tech and 4 Open Source/Dev items.
-Each object: title (in Chinese, compelling headline style), summary (2-3 sentences in Chinese, include key facts/numbers), url, category (one of: AI动态/模型发布/开源项目/开发工具/行业洞察), source (media name), time (relative like "3小时前").
-Return only valid JSON array.`,
-      '正在采集科技要闻……'
-    );
-
-    let newsItems;
-    try {
-      newsItems = parseJSON(newsRaw);
-    } catch(e) {
-      newsItems = generateFallbackNews();
-    }
-    renderNews(newsItems);
-
-    // Show content
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('content').classList.add('visible');
-
-  } catch(err) {
-    document.getElementById('loading').innerHTML = `
-      <div class="error-msg">
-        印刷机遭遇故障 — ${err.message}<br><br>
-        <button class="refresh-btn" onclick="loadAll()">↻ 重新尝试</button>
-      </div>`;
-  }
-}
-
-// ─── FALLBACK DATA ────────────────────────────────────
-function generateFallbackTrending() {
-  return [
-    {name:'anthropic/claude-code',author:'anthropic',description:'用于智能编程的官方 CLI 工具',url:'https://github.com/anthropics/claude-code',stars:'28.4k',language:'TypeScript',todayStars:'1.2k'},
-    {name:'microsoft/markitdown',author:'microsoft',description:'将各类文件转换为 Markdown 的工具库',url:'https://github.com/microsoft/markitdown',stars:'41k',language:'Python',todayStars:'890'},
-    {name:'deepseek-ai/DeepSeek-V3',author:'deepseek-ai',description:'最新开源大语言模型',url:'https://github.com/deepseek-ai/DeepSeek-V3',stars:'89k',language:'Python',todayStars:'2.1k'},
-    {name:'browser-use/browser-use',author:'browser-use',description:'让 AI 能够操控浏览器完成任务',url:'https://github.com/browser-use/browser-use',stars:'35k',language:'Python',todayStars:'670'},
-    {name:'shadcn-ui/ui',author:'shadcn-ui',description:'高质量 React UI 组件集合',url:'https://github.com/shadcn-ui/ui',stars:'65k',language:'TypeScript',todayStars:'420'},
-    {name:'ollama/ollama',author:'ollama',description:'本地运行大语言模型的工具',url:'https://github.com/ollama/ollama',stars:'78k',language:'Go',todayStars:'560'},
-    {name:'juspay/hyperswitch',author:'juspay',description:'开源支付编排平台',url:'https://github.com/juspay/hyperswitch',stars:'12k',language:'Rust',todayStars:'340'},
-    {name:'vercel/ai',author:'vercel',description:'用于构建 AI 应用的 SDK',url:'https://github.com/vercel/ai',stars:'9.8k',language:'TypeScript',todayStars:'280'},
-    {name:'ggerganov/whisper.cpp',author:'ggerganov',description:'C++ 实现的 Whisper 语音识别',url:'https://github.com/ggerganov/whisper.cpp',stars:'33k',language:'C++',todayStars:'190'},
-  ];
-}
-
-function generateFallbackNews() {
-  return [
-    {title:'Anthropic 发布 Claude 3.7 Sonnet，推理能力大幅跃升',summary:'Anthropic 正式推出 Claude 3.7 Sonnet，新增"扩展思考"模式，在复杂数学与代码推理任务上表现显著优于前代。该模型已向 API 用户和 Claude.ai 订阅者开放。',url:'#',category:'模型发布',source:'Anthropic Blog',time:'2小时前'},
-    {title:'GitHub Copilot 工作区模式全面开放，AI 自动完成整个功能开发',summary:'微软宣布 Copilot Workspace 向所有付费用户开放，开发者仅需自然语言描述需求，AI 将自动规划、编写并测试完整代码分支，显著缩短开发周期。',url:'#',category:'开发工具',source:'GitHub Blog',time:'4小时前'},
-    {title:'Meta 开源 Llama 4 系列，最大参数量达 4050 亿',summary:'Meta AI 发布 Llama 4 系列模型，含 Scout、Maverick、Behemoth 三款，支持多模态输入与百万级 token 上下文。全部模型允许商业使用。',url:'#',category:'AI动态',source:'Meta AI Blog',time:'5小时前'},
-    {title:'Rust 2024 Edition 正式稳定，async trait 终于原生支持',summary:'Rust 官方宣布 2024 Edition 进入稳定版，最受期待的 async trait 特性无需额外 crate 即可使用。社区认为这是近年来最重要的语言更新之一。',url:'#',category:'开源项目',source:'The Rust Blog',time:'6小时前'},
-    {title:'Cursor 编辑器融资 1 亿美元，月活开发者突破 50 万',summary:'AI 代码编辑器 Cursor 完成 1 亿美元 B 轮融资，估值达 25 亿美元。官方披露月活跃开发者已超 50 万，企业用户增速尤为突出。',url:'#',category:'AI动态',source:'TechCrunch',time:'8小时前'},
-    {title:'uv：Rust 编写的 Python 包管理器，速度比 pip 快 100 倍',summary:'开源项目 uv 在 GitHub 上迅速走红，其用 Rust 重写的 Python 依赖解析引擎在基准测试中比 pip 快 100 倍以上。已获 Astral 官方维护，逐步成为新一代标准工具。',url:'#',category:'开源项目',source:'GitHub',time:'10小时前'},
-    {title:'Google 发布 Gemini 2.5 Pro，代码生成评测登顶',summary:'谷歌推出 Gemini 2.5 Pro 实验版，在 SWE-bench 代码修复评测上以 63.8% 准确率刷新纪录。模型现已在 Google AI Studio 免费开放体验。',url:'#',category:'模型发布',source:'Google DeepMind',time:'12小时前'},
-    {title:'Neovim 0.11 发布：内置 LSP 客户端全面重构',summary:'Neovim 正式发布 0.11 版本，内置 LSP 客户端经过全面重写，响应速度提升明显。同时新增对 Tree-sitter 增量解析的深度集成支持。',url:'#',category:'开发工具',source:'Neovim GitHub',time:'1天前'},
-    {title:'Cloudflare Workers AI 免费层每日调用额度提升至 10 万次',summary:'Cloudflare 宣布扩大 Workers AI 免费层额度，个人开发者每日可免费调用主流开源模型（含 Llama、Mistral）达 10 万次，推动 AI 推理更易获取。',url:'#',category:'行业洞察',source:'Cloudflare Blog',time:'2天前'},
-  ];
-}
-
-// ─── INIT ──────────────────────────────────────────────
-loadAll();
-</script>
 </body>
 </html>
