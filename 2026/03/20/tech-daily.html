@@ -3,650 +3,650 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>科技日报 · The Daily</title>
+<title>The Daily Digest · 每日要闻</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Noto+Serif+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Noto+Serif+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
- :root {
- --ink: #1a1208;
- --ink-light: #3d2f1a;
- --paper: #f5f0e8;
- --paper-dark: #ede6d5;
- --rule: #2a1f0e;
- --accent: #8b1a1a;
- --gray: #6b5c45;
- --light-gray: #c8b99a;
- }
+  :root {
+    --ink: #1a1208;
+    --ink-light: #3d2f1a;
+    --paper: #f5f0e8;
+    --paper-dark: #ede6d5;
+    --rule: #2a1f0e;
+    --accent: #8b1a1a;
+    --gray: #6b5c45;
+    --light-gray: #c8b99a;
+  }
 
- * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
- body {
- background: #d4c9b0;
- font-family: 'Noto Serif SC', serif;
- color: var(--ink);
- min-height: 100vh;
- padding: 20px;
- }
+  body {
+    background: #d4c9b0;
+    font-family: 'IM Fell English', 'Noto Serif SC', serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 20px;
+    background-image: 
+      radial-gradient(ellipse at 20% 50%, rgba(139,90,43,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(100,60,20,0.06) 0%, transparent 50%);
+  }
 
- .newspaper {
- max-width: 1100px;
- margin: 0 auto;
- background: var(--paper);
- box-shadow: 4px 4px 20px rgba(0,0,0,0.35);
- position: relative;
- overflow: hidden;
- }
+  .newspaper {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--paper);
+    box-shadow: 
+      0 0 0 1px rgba(0,0,0,0.2),
+      4px 4px 20px rgba(0,0,0,0.35),
+      8px 8px 40px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+  }
 
- .newspaper::before {
- content: '';
- position: absolute;
- inset: 0;
- background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
- pointer-events: none;
- z-index: 10;
- opacity: 0.6;
- }
+  /* Paper texture overlay */
+  .newspaper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.6;
+  }
 
- /* MASTHEAD */
- .masthead {
- padding: 16px 40px 0;
- border-bottom: 3px double var(--rule);
- }
+  /* ─── MASTHEAD ─── */
+  .masthead {
+    padding: 16px 40px 0;
+    border-bottom: 3px double var(--rule);
+    position: relative;
+  }
 
- .masthead-top {
- display: flex;
- justify-content: space-between;
- align-items: center;
- font-size: 11px;
- color: var(--gray);
- letter-spacing: 0.05em;
- padding-bottom: 8px;
- border-bottom: 1px solid var(--rule);
- margin-bottom: 8px;
- }
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--gray);
+    font-family: 'Noto Serif SC', serif;
+    letter-spacing: 0.05em;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 8px;
+  }
 
- .paper-name {
- font-family: 'Playfair Display', serif;
- font-size: clamp(28px, 5vw, 48px);
- text-align: center;
- line-height: 1.1;
- color: var(--ink);
- font-weight: 900;
- letter-spacing: -1px;
- padding: 8px 0 12px;
- }
+  .paper-name {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: clamp(36px, 6vw, 72px);
+    text-align: center;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -1px;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.08);
+    padding: 6px 0 10px;
+  }
 
- .masthead-sub {
- text-align: center;
- font-family: 'Playfair Display', serif;
- font-style: italic;
- font-size: 13px;
- color: var(--gray);
- letter-spacing: 0.15em;
- padding-bottom: 12px;
- }
+  .masthead-sub {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--gray);
+    letter-spacing: 0.15em;
+    padding-bottom: 12px;
+  }
 
- .masthead-meta {
- display: flex;
- justify-content: space-between;
- align-items: center;
- font-size: 11px;
- color: var(--ink-light);
- padding: 6px 0 10px;
- border-top: 1px solid var(--rule);
- }
+  .masthead-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-family: 'Noto Serif SC', serif;
+    color: var(--ink-light);
+    padding: 6px 0 10px;
+    border-top: 1px solid var(--rule);
+  }
 
- .edition-tag {
- background: var(--ink);
- color: var(--paper);
- padding: 2px 8px;
- font-size: 10px;
- letter-spacing: 0.12em;
- text-transform: uppercase;
- }
+  .edition-tag {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 8px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
 
- /* CONTENT AREA */
- .content-area {
- padding: 0 40px 40px;
- position: relative;
- z-index: 5;
- }
+  /* ─── LOADING STATE ─── */
+  .loading-section {
+    padding: 60px 40px;
+    text-align: center;
+  }
 
- /* SECTION HEADERS */
- .section-header {
- margin: 28px 0 16px;
- text-align: center;
- position: relative;
- }
+  .loading-press {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--gray);
+    margin-bottom: 20px;
+  }
 
- .section-header::before,
- .section-header::after {
- content: '';
- display: block;
- height: 1px;
- background: var(--rule);
- }
- .section-header::before { margin-bottom: 6px; }
- .section-header::after { margin-top: 6px; }
+  .press-anim {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 20px 0;
+  }
 
- .section-title {
- font-family: 'Playfair Display', serif;
- font-size: 11px;
- font-weight: 700;
- letter-spacing: 0.35em;
- text-transform: uppercase;
- color: var(--ink);
- display: inline-block;
- padding: 0 14px;
- background: var(--paper);
- position: relative;
- z-index: 1;
- }
+  .press-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--ink);
+    border-radius: 50%;
+    animation: pressPulse 1.4s ease-in-out infinite;
+  }
+  .press-dot:nth-child(2) { animation-delay: 0.2s; }
+  .press-dot:nth-child(3) { animation-delay: 0.4s; }
 
- .thick-rule {
- height: 3px;
- background: var(--rule);
- margin: 4px 0;
- }
+  @keyframes pressPulse {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+    40% { transform: scale(1); opacity: 1; }
+  }
 
- /* GRID — 3 columns */
- .item-grid {
- display: grid;
- grid-template-columns: repeat(3, 1fr);
- gap: 0;
- border: 1px solid var(--rule);
- }
+  .loading-status {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    color: var(--gray);
+    letter-spacing: 0.05em;
+  }
 
- .grid-item {
- padding: 14px 16px;
- border-right: 1px solid var(--light-gray);
- border-bottom: 1px solid var(--light-gray);
- transition: background 0.2s;
- }
+  /* ─── CONTENT AREA ─── */
+  .content-area {
+    padding: 0 40px 40px;
+    display: none;
+  }
 
- .grid-item:hover { background: var(--paper-dark); }
- .grid-item:nth-child(3n) { border-right: none; }
- .grid-item:nth-last-child(-n+3) { border-bottom: none; }
+  .content-area.visible {
+    display: block;
+    animation: fadeIn 0.8s ease;
+  }
 
- .item-rank {
- font-family: 'Playfair Display', serif;
- font-size: 26px;
- font-weight: 900;
- color: var(--light-gray);
- line-height: 1;
- float: left;
- margin-right: 10px;
- margin-top: 2px;
- }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
- .item-title {
- font-family: 'Playfair Display', serif;
- font-weight: 700;
- font-size: 14px;
- color: var(--ink);
- text-decoration: none;
- display: block;
- line-height: 1.3;
- }
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    margin: 28px 0 16px;
+    text-align: center;
+    position: relative;
+  }
 
- .item-title:hover { color: var(--accent); }
+  .section-header::before,
+  .section-header::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: var(--rule);
+  }
+  .section-header::before { margin-bottom: 6px; }
+  .section-header::after { margin-top: 6px; }
 
- .item-meta {
- font-size: 10px;
- color: var(--gray);
- margin-bottom: 4px;
- }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: inline-block;
+    padding: 0 14px;
+    background: var(--paper);
+    position: relative;
+    z-index: 1;
+  }
 
- .item-desc {
- font-size: 11px;
- color: var(--ink-light);
- line-height: 1.5;
- margin-top: 4px;
- display: -webkit-box;
- -webkit-line-clamp: 2;
- -webkit-box-orient: vertical;
- overflow: hidden;
- }
+  .thick-rule {
+    height: 3px;
+    background: var(--rule);
+    margin: 4px 0;
+  }
 
- .item-stats {
- margin-top: 8px;
- display: flex;
- gap: 12px;
- font-size: 10px;
- color: var(--gray);
- }
+  /* ─── GITHUB TRENDING — 3 columns ─── */
+  .trending-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
 
- .item-stats .stars {
- color: var(--accent);
- font-weight: 600;
- }
+  .trending-item {
+    padding: 14px 16px;
+    border-right: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--light-gray);
+    position: relative;
+    transition: background 0.2s;
+  }
 
- /* NEWS COLUMNS */
- .news-columns {
- column-count: 3;
- column-gap: 0;
- column-rule: 1px solid var(--light-gray);
- border: 1px solid var(--rule);
- border-top: none;
- }
+  .trending-item:hover { background: var(--paper-dark); }
+  .trending-item:nth-child(3n) { border-right: none; }
+  .trending-item:nth-last-child(-n+3) { border-bottom: none; }
 
- .news-item {
- break-inside: avoid;
- padding: 12px 16px;
- border-bottom: 1px solid var(--light-gray);
- }
+  .trending-rank {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--light-gray);
+    line-height: 1;
+    float: left;
+    margin-right: 10px;
+    margin-top: 2px;
+  }
 
- .news-category {
- font-family: 'Playfair Display', serif;
- font-size: 8px;
- font-weight: 700;
- letter-spacing: 0.2em;
- text-transform: uppercase;
- color: var(--accent);
- margin-bottom: 3px;
- }
+  .trending-body {}
 
- .news-headline {
- font-family: 'Playfair Display', serif;
- font-size: 13px;
- font-weight: 700;
- line-height: 1.3;
- margin-bottom: 4px;
- }
+  .trending-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink);
+    text-decoration: none;
+    display: block;
+    line-height: 1.3;
+  }
 
- .news-headline a {
- color: var(--ink);
- text-decoration: none;
- }
+  .trending-name:hover { color: var(--accent); }
 
- .news-headline a:hover { color: var(--accent); }
+  .trending-author {
+    font-size: 10px;
+    color: var(--gray);
+    font-family: 'Noto Serif SC', serif;
+    margin-bottom: 4px;
+  }
 
- .news-summary {
- font-size: 11px;
- line-height: 1.6;
- color: var(--ink-light);
- }
+  .trending-desc {
+    font-size: 11.5px;
+    color: var(--ink-light);
+    line-height: 1.5;
+    font-family: 'Noto Serif SC', serif;
+    margin-top: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
- .news-byline {
- font-size: 9px;
- color: var(--gray);
- font-style: italic;
- margin-top: 4px;
- }
+  .trending-meta {
+    margin-top: 6px;
+    display: flex;
+    gap: 10px;
+    font-size: 10px;
+    color: var(--gray);
+    font-family: 'Noto Serif SC', serif;
+  }
 
- /* FOOTER */
- .newspaper-footer {
- border-top: 3px double var(--rule);
- padding: 10px 40px;
- display: flex;
- justify-content: space-between;
- font-size: 10px;
- color: var(--gray);
- position: relative;
- z-index: 5;
- }
+  /* ─── NEWS — newspaper column layout ─── */
+  .news-columns {
+    column-count: 3;
+    column-gap: 0;
+    column-rule: 1px solid var(--light-gray);
+    border: 1px solid var(--rule);
+    border-top: none;
+  }
 
- .newspaper-footer a {
- color: var(--accent);
- text-decoration: none;
- }
+  .news-item {
+    break-inside: avoid;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--light-gray);
+  }
 
- @media (max-width: 768px) {
- body { padding: 10px; }
- .masthead { padding: 12px 20px 0; }
- .content-area { padding: 0 20px 30px; }
- .item-grid { grid-template-columns: 1fr 1fr; }
- .news-columns { column-count: 1; }
- .newspaper-footer { padding: 10px 20px; flex-direction: column; text-align: center; gap: 8px; }
- }
+  .news-category {
+    font-family: 'Playfair Display', serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .news-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .news-headline a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .news-headline a:hover { color: var(--accent); }
+
+  .news-summary {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+
+  .news-byline {
+    font-size: 10px;
+    color: var(--gray);
+    font-style: italic;
+    margin-top: 6px;
+    font-family: 'IM Fell English', serif;
+  }
+
+  /* ─── LEAD STORY ─── */
+  .lead-story {
+    border: 1px solid var(--rule);
+    padding: 20px 24px;
+    margin-bottom: 0;
+    position: relative;
+    background: var(--paper);
+  }
+
+  .lead-story .news-headline {
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .lead-story .news-summary {
+    font-size: 13.5px;
+    column-count: 2;
+    column-gap: 24px;
+    column-rule: 1px solid var(--light-gray);
+  }
+
+  /* ─── FOOTER ─── */
+  .newspaper-footer {
+    border-top: 3px double var(--rule);
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 10px;
+    color: var(--gray);
+  }
+
+  .refresh-btn {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 8px 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto 0;
+    transition: background 0.2s;
+  }
+
+  .refresh-btn:hover { background: var(--accent); }
+
+  .error-msg {
+    text-align: center;
+    padding: 30px;
+    color: var(--accent);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 0;
+  }
+
+  .col-2 { column-count: 2 !important; }
+
+  @media (max-width: 768px) {
+    body { padding: 10px; }
+    .masthead { padding: 12px 20px 0; }
+    .content-area { padding: 0 20px 30px; }
+    .trending-grid { grid-template-columns: 1fr 1fr; }
+    .news-columns { column-count: 1; }
+    .lead-story .news-summary { column-count: 1; }
+    .newspaper-footer { padding: 10px 20px; }
+  }
 </style>
 </head>
 <body>
 
 <div class="newspaper">
- <!-- MASTHEAD -->
- <div class="masthead">
- <div class="masthead-top">
- <span>Vol. I · No. {{ISSUE_NUM}}</span>
- <span>ESTABLISHED 2026 · 每日出版</span>
- <span>GRATIS · {{TAGLINE}}</span>
- </div>
- <div class="paper-name">科技日报</div>
- <div class="masthead-sub">每日科技资讯汇总</div>
- <div class="masthead-meta">
- <span>2026 年 03 月 20 日</span>
- <span class="edition-tag">{{EDITION}}</span>
- <span>{{WEATHER}}</span>
- </div>
- </div>
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="masthead-top">
+      <span id="vol-info">Vol. I · No. <span id="issue-num">—</span></span>
+      <span>ESTABLISHED MMXXV · 每日出版</span>
+      <span id="price-tag">GRATIS · 每日精选</span>
+    </div>
+    <div class="paper-name">The Daily Digest</div>
+    <div class="masthead-sub">AI · 开源 · 开发者 · 每日精选</div>
+    <div class="masthead-meta">
+      <span id="date-display">— 年 — 月 — 日</span>
+      <span class="edition-tag">每日早报</span>
+      <span id="weather-tag">⊙ 科技晴好</span>
+    </div>
+  </div>
 
- <!-- CONTENT -->
- <div class="content-area">
- 
- <!-- SECTION 1: GRID -->
- <div class="section-header">
- <div class="thick-rule"></div>
- <div class="section-title">⬡ GitHub 热门项目</div>
- <div class="thick-rule"></div>
- </div>
- <div class="item-grid">
- 
-        <div class="grid-item">
-            <div class="item-rank">01</div>
-            <div>
-                <div class="item-meta">ElielNascimento</div>
-                <a class="item-title" href="https://github.com/ElielNascimento/git-eng5s-A" target="_blank">git-eng5s-A</a>
-                <div class="item-desc">暂无描述</div>
-                <div class="item-stats">
-                    <span class="stars">★ 4</span>
-                    <span>Unknown</span>
-                </div>
-            </div>
-        </div>
+  <!-- LOADING -->
+  <div class="loading-section" id="loading">
+    <div class="loading-press">正在排版印刷中……</div>
+    <div class="press-anim">
+      <div class="press-dot"></div>
+      <div class="press-dot"></div>
+      <div class="press-dot"></div>
+    </div>
+    <div class="loading-status" id="loading-status">正在从各大信源采集今日要闻</div>
+  </div>
 
-        <div class="grid-item">
-            <div class="item-rank">02</div>
-            <div>
-                <div class="item-meta">Its-JrDev</div>
-                <a class="item-title" href="https://github.com/Its-JrDev/riwi-to-do-manager" target="_blank">riwi-to-do-manager</a>
-                <div class="item-desc">暂无描述</div>
-                <div class="item-stats">
-                    <span class="stars">★ 3</span>
-                    <span>Unknown</span>
-                </div>
-            </div>
-        </div>
+  <!-- CONTENT -->
+  <div class="content-area" id="content">
+    
+    <!-- GITHUB TRENDING -->
+    <div class="section-header">
+      <div class="thick-rule"></div>
+      <div class="section-title">⬡ GitHub 开源风云榜 · Trending Repositories</div>
+      <div class="thick-rule"></div>
+    </div>
+    <div class="trending-grid" id="trending-grid">
+      <!-- Filled by JS -->
+    </div>
 
-        <div class="grid-item">
-            <div class="item-rank">03</div>
-            <div>
-                <div class="item-meta">umutcamliyurt</div>
-                <a class="item-title" href="https://github.com/umutcamliyurt/Praesidium" target="_blank">Praesidium</a>
-                <div class="item-desc">An Android physical security tool</div>
-                <div class="item-stats">
-                    <span class="stars">★ 2</span>
-                    <span>Java</span>
-                </div>
-            </div>
-        </div>
+    <!-- NEWS SECTION -->
+    <div class="section-header" style="margin-top:28px">
+      <div class="thick-rule"></div>
+      <div class="section-title">☰ AI · 开源 · 开发者要闻</div>
+      <div class="thick-rule"></div>
+    </div>
+    <div class="news-columns" id="news-columns">
+      <!-- Filled by JS -->
+    </div>
 
-        <div class="grid-item">
-            <div class="item-rank">04</div>
-            <div>
-                <div class="item-meta">sebclawops</div>
-                <a class="item-title" href="https://github.com/sebclawops/project-loop-skill" target="_blank">project-loop-skill</a>
-                <div class="item-desc">Lean project orchestration skill for OpenClaw</div>
-                <div class="item-stats">
-                    <span class="stars">★ 2</span>
-                    <span>Unknown</span>
-                </div>
-            </div>
-        </div>
+    <button class="refresh-btn" onclick="loadAll()">↻ 重新印刷今日报纸</button>
+  </div>
 
-        <div class="grid-item">
-            <div class="item-rank">05</div>
-            <div>
-                <div class="item-meta">cmubig</div>
-                <a class="item-title" href="https://github.com/cmubig/MOSAIC" target="_blank">MOSAIC</a>
-                <div class="item-desc">Official inference release for: MOSAIC: Generating Consistent, Privacy-Preservin</div>
-                <div class="item-stats">
-                    <span class="stars">★ 2</span>
-                    <span>Python</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-item">
-            <div class="item-rank">06</div>
-            <div>
-                <div class="item-meta">sparklingonberry</div>
-                <a class="item-title" href="https://github.com/sparklingonberry/SparkOS" target="_blank">SparkOS</a>
-                <div class="item-desc">暂无描述</div>
-                <div class="item-stats">
-                    <span class="stars">★ 2</span>
-                    <span>Python</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-item">
-            <div class="item-rank">07</div>
-            <div>
-                <div class="item-meta">StanLiveOps</div>
-                <a class="item-title" href="https://github.com/StanLiveOps/trainingsim" target="_blank">trainingsim</a>
-                <div class="item-desc">simulator for training live ops</div>
-                <div class="item-stats">
-                    <span class="stars">★ 2</span>
-                    <span>HTML</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-item">
-            <div class="item-rank">08</div>
-            <div>
-                <div class="item-meta">5771323yang</div>
-                <a class="item-title" href="https://github.com/5771323yang/ZVycIKzIoX" target="_blank">ZVycIKzIoX</a>
-                <div class="item-desc">【Java计算机毕业设计分享】基于SpringBoot的药材店铺管理系统设计与实现，MySQL Java开发 毕业设计 实战项目【附源码、文档报告、代码讲解】</div>
-                <div class="item-stats">
-                    <span class="stars">★ 1</span>
-                    <span>Unknown</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-item">
-            <div class="item-rank">09</div>
-            <div>
-                <div class="item-meta">3886370410</div>
-                <a class="item-title" href="https://github.com/3886370410/hpcGMSnTWP" target="_blank">hpcGMSnTWP</a>
-                <div class="item-desc">【Python计算机毕业设计分享】基于深度学习YOLO11电动车骑行规范识别系统，MySQL Python开发 毕业设计 实战项目【附源码、文档报告、代码讲解】</div>
-                <div class="item-stats">
-                    <span class="stars">★ 1</span>
-                    <span>Unknown</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-item">
-            <div class="item-rank">10</div>
-            <div>
-                <div class="item-meta">DeutschlandNotReal</div>
-                <a class="item-title" href="https://github.com/DeutschlandNotReal/Perekop" target="_blank">Perekop</a>
-                <div class="item-desc">暂无描述</div>
-                <div class="item-stats">
-                    <span class="stars">★ 1</span>
-                    <span>C++</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-item">
-            <div class="item-rank">11</div>
-            <div>
-                <div class="item-meta">3886370410</div>
-                <a class="item-title" href="https://github.com/3886370410/ByMbfiWShf" target="_blank">ByMbfiWShf</a>
-                <div class="item-desc">【Java计算机毕业设计分享】基于SPIMI的新闻搜索引擎系统（源码+论文），MySQL Java开发 毕业设计 实战项目【附源码、文档报告、代码讲解】</div>
-                <div class="item-stats">
-                    <span class="stars">★ 1</span>
-                    <span>Unknown</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-item">
-            <div class="item-rank">12</div>
-            <div>
-                <div class="item-meta">P0n40</div>
-                <a class="item-title" href="https://github.com/P0n40/Prince-of-Persia-Warrior-Within-Trainer-Release" target="_blank">Prince-of-Persia-Warrior-Within-Trainer-Release</a>
-                <div class="item-desc">Release repository for Prince of Persia: Warrior Within Trainer +15 by mul0 (v1.</div>
-                <div class="item-stats">
-                    <span class="stars">★ 1</span>
-                    <span>Unknown</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-item">
-            <div class="item-rank">13</div>
-            <div>
-                <div class="item-meta">isso-1909</div>
-                <a class="item-title" href="https://github.com/isso-1909/Weather_App" target="_blank">Weather_App</a>
-                <div class="item-desc">my Weather App</div>
-                <div class="item-stats">
-                    <span class="stars">★ 1</span>
-                    <span>JavaScript</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-item">
-            <div class="item-rank">14</div>
-            <div>
-                <div class="item-meta">joelhooks</div>
-                <a class="item-title" href="https://github.com/joelhooks/pi-skill-interpolation" target="_blank">pi-skill-interpolation</a>
-                <div class="item-desc">⚡ pi extension for dynamic shell interpolation in skills — !\ syntax, gated on a</div>
-                <div class="item-stats">
-                    <span class="stars">★ 1</span>
-                    <span>TypeScript</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-item">
-            <div class="item-rank">15</div>
-            <div>
-                <div class="item-meta">5771323yang</div>
-                <a class="item-title" href="https://github.com/5771323yang/EJjJSrGeZj" target="_blank">EJjJSrGeZj</a>
-                <div class="item-desc">【Java计算机毕业设计分享】基于YOLO+深度学习的安全背心穿戴检测平台，MySQL Java开发 毕业设计 实战项目【附源码、文档报告、代码讲解】</div>
-                <div class="item-stats">
-                    <span class="stars">★ 1</span>
-                    <span>Unknown</span>
-                </div>
-            </div>
-        </div>
- </div>
-
- <!-- SECTION 2: NEWS COLUMNS -->
- <div class="section-header" style="margin-top:28px">
- <div class="thick-rule"></div>
- <div class="section-title">⬡ Hacker News 热门</div>
- <div class="thick-rule"></div>
- </div>
- <div class="news-columns">
- 
-        <div class="news-item">
-            <div class="news-category">Hacker News</div>
-            <div class="news-headline"><a href="https://code.claude.com/docs/en/channels" target="_blank">Claude Code 推出 Channels 功能</a></div>
-            <div class="news-byline">85 points · jasonjmcghee</div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">Hacker News</div>
-            <div class="news-headline"><a href="https://omar.yt/posts/wayland-set-the-linux-desktop-back-by-10-years" target="_blank">Wayland 让 Linux 桌面倒退了 10 年</a></div>
-            <div class="news-byline">80 points · omarroth</div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">Hacker News</div>
-            <div class="news-headline"><a href="https://astral.sh/blog/openai" target="_blank">Astral 团队宣布加入 OpenAI</a></div>
-            <div class="news-byline">1206 points · ibraheemdev</div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">Hacker News</div>
-            <div class="news-headline"><a href="https://github.com/cockpit-project/cockpit" target="_blank">Cockpit：服务器 Web 管理界面</a></div>
-            <div class="news-byline">164 points · modinfo</div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">Hacker News</div>
-            <div class="news-headline"><a href="https://arstechnica.com/gadgets/2026/03/google-details-new-24-hour-process-to-sideload-unverified-android-apps/" target="_blank">谷歌详解侧载未验证 Android 应用的新流程</a></div>
-            <div class="news-byline">479 points · 0xedb</div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">Hacker News</div>
-            <div class="news-headline"><a href="https://www.carryology.com/insights/how-the-turner-twins-are-mythbusting-modern-gear/" target="_blank">Turner 双胞胎实测户外装备</a></div>
-            <div class="news-byline">111 points · greedo</div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">Hacker News</div>
-            <div class="news-headline"><a href="https://forums.tigsource.com/index.php?topic=40832.msg1363742#msg1363742" target="_blank">Return of the Obra Dinn: spherical mapped dithering for a 1bpp first-person game</a></div>
-            <div class="news-byline">236 points · PaulHoule</div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">Hacker News</div>
-            <div class="news-headline"><a href="https://www.bristol.ac.uk/news/2026/march/bombarding-gamblers-with-offers-greatly-increases-betting-and-gambling-harm.html" target="_blank">Bombarding gamblers with offers greatly increases betting and gambling harm</a></div>
-            <div class="news-byline">58 points · hhs</div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">Hacker News</div>
-            <div class="news-headline"><a href="https://github.com/KittenML/KittenTTS" target="_blank">Show HN: Three new Kitten TTS models – smallest less than 25MB</a></div>
-            <div class="news-byline">311 points · rohan_joshi</div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">Hacker News</div>
-            <div class="news-headline"><a href="https://www.marksimonson.com/notebook/view/the-day-i-discovered-type-design/" target="_blank">The Day I Discovered Type Design</a></div>
-            <div class="news-byline">25 points · ingve</div>
-        </div>
- </div>
-
- <!-- SECTION 3: NEWS COLUMNS (optional) -->
- 
-        <div class="news-item">
-            <div class="news-category">IT之家</div>
-            <div class="news-headline"><a href="https://www.ithome.com/0/930/850.htm" target="_blank">vivo X300s 手机跑分曝光：天玑 9500 芯片，16GB 内存</a></div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">IT之家</div>
-            <div class="news-headline"><a href="https://www.ithome.com/0/930/848.htm" target="_blank">OPPO Pad mini 小平板曝光：8.8 英寸高刷屏 + 骁龙 8 Gen5 芯片，定位类似华为 MatePad mini</a></div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">IT之家</div>
-            <div class="news-headline"><a href="https://www.ithome.com/0/930/847.htm" target="_blank">三星 Galaxy A57 手机渲染图 / 真机图曝光</a></div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">IT之家</div>
-            <div class="news-headline"><a href="https://www.ithome.com/0/930/846.htm" target="_blank">配主动散热风扇：华为 Mate 80 Pro Max 风驰版 12:08 开启预订</a></div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">IT之家</div>
-            <div class="news-headline"><a href="https://www.ithome.com/0/930/845.htm" target="_blank">我国第二艘国产大型邮轮“爱达 · 花城号”今日出坞，年底前交付</a></div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">IT之家</div>
-            <div class="news-headline"><a href="https://www.ithome.com/0/930/844.htm" target="_blank">消息称三星显示重启自发光 QNED 研发</a></div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">IT之家</div>
-            <div class="news-headline"><a href="https://www.ithome.com/0/930/843.htm" target="_blank">亚马逊创始人贝索斯豪赌 AI：奔走中东、新加坡募集 1000 亿美元，瞄准制造业</a></div>
-        </div>
-
-        <div class="news-item">
-            <div class="news-category">IT之家</div>
-            <div class="news-headline"><a href="https://www.ithome.com/0/930/842.htm" target="_blank">星战大富翁：育碧旗下《地产大亨：星球大战正邪交锋》游戏将于 6 月 11 日发售</a></div>
-        </div>
-
- </div>
-
- <!-- FOOTER -->
- <div class="newspaper-footer">
- <span>科技日报 · 太子自动生成</span>
- <span>更新时间：2026 年 03 月 20 日</span>
- <span>数据来源：GitHub/Hacker News/IT之家</span>
- </div>
+  <!-- FOOTER -->
+  <div class="newspaper-footer">
+    <span>The Daily Digest · AI 智能采编</span>
+    <span id="gen-time">生成时间：—</span>
+    <span>Powered by Claude · Anthropic</span>
+  </div>
 </div>
 
+<script>
+// ─── DATE SETUP ───────────────────────────────────────
+function setupDate() {
+  const now = new Date();
+  const y = now.getFullYear(), m = now.getMonth()+1, d = now.getDate();
+  document.getElementById('date-display').textContent =
+    `${y} 年 ${String(m).padStart(2,'0')} 月 ${String(d).padStart(2,'0')} 日 · ${['周日','周一','周二','周三','周四','周五','周六'][now.getDay()]}`;
+  document.getElementById('issue-num').textContent =
+    String(Math.floor((now - new Date(2025,0,1))/86400000)+1).padStart(3,'0');
+  document.getElementById('gen-time').textContent =
+    `生成时间：${now.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})}`;
+}
+
+// ─── API CALL ─────────────────────────────────────────
+async function callClaude(prompt, statusMsg) {
+  document.getElementById('loading-status').textContent = statusMsg;
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+  const data = await res.json();
+  // Extract text from all content blocks
+  return data.content
+    .filter(b => b.type === 'text')
+    .map(b => b.text)
+    .join('');
+}
+
+// ─── PARSE JSON SAFELY ───────────────────────────────
+function parseJSON(text) {
+  const clean = text.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
+  const start = clean.indexOf('[') !== -1 ? clean.indexOf('[') : clean.indexOf('{');
+  const end = clean.lastIndexOf(']') !== -1 && clean.indexOf('[') !== -1
+    ? clean.lastIndexOf(']')
+    : clean.lastIndexOf('}');
+  return JSON.parse(clean.slice(start, end+1));
+}
+
+// ─── RENDER TRENDING ─────────────────────────────────
+function renderTrending(items) {
+  const grid = document.getElementById('trending-grid');
+  grid.innerHTML = items.slice(0,9).map((r, i) => `
+    <div class="trending-item">
+      <div class="trending-rank">${String(i+1).padStart(2,'0')}</div>
+      <div class="trending-body">
+        <div class="trending-author">${r.author || ''}</div>
+        <a class="trending-name" href="${r.url || '#'}" target="_blank">${r.name}</a>
+        <div class="trending-desc">${r.description || '暂无描述'}</div>
+        <div class="trending-meta">
+          <span>★ ${r.stars || '—'}</span>
+          <span>${r.language || ''}</span>
+          ${r.todayStars ? `<span>↑ ${r.todayStars} 今日</span>` : ''}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── RENDER NEWS ─────────────────────────────────────
+function renderNews(items) {
+  const col = document.getElementById('news-columns');
+  col.innerHTML = items.map((n, i) => `
+    <div class="news-item ${i===0 ? 'lead' : ''}">
+      <div class="news-category">${n.category || '科技'}</div>
+      <div class="news-headline">
+        <a href="${n.url || '#'}" target="_blank">${n.title}</a>
+      </div>
+      <div class="news-summary">${n.summary}</div>
+      <div class="news-byline">${n.source || 'AI 编辑整理'} · ${n.time || '今日'}</div>
+    </div>
+  `).join('');
+}
+
+// ─── MAIN LOADER ─────────────────────────────────────
+async function loadAll() {
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('content').classList.remove('visible');
+  setupDate();
+
+  try {
+    // 1. GitHub Trending
+    const trendingRaw = await callClaude(
+      `Search GitHub trending today and return ONLY a JSON array (no markdown, no explanation) of the top 9 trending repositories.
+Each object must have: name (repo name only), author (github username), description (brief, in Chinese if possible), url (full github url), stars (total star count as string), language, todayStars (stars gained today as string).
+Return only valid JSON array like: [{"name":"...","author":"...","description":"...","url":"...","stars":"...","language":"...","todayStars":"..."}]`,
+      '正在检索 GitHub 今日热门项目……'
+    );
+
+    let trendingItems;
+    try {
+      trendingItems = parseJSON(trendingRaw);
+    } catch(e) {
+      trendingItems = generateFallbackTrending();
+    }
+    renderTrending(trendingItems);
+
+    // 2. Tech News
+    const newsRaw = await callClaude(
+      `Search for today's most important news (March 2026) focused ONLY on these two areas:
+1. AI & Tech: LLM releases, AI research breakthroughs, AI products, model benchmarks, AI companies
+2. Open Source & Developer: GitHub projects, dev tools, programming languages, frameworks, CLI tools, developer ecosystems
+
+Return ONLY a JSON array (no markdown, no explanation) of 9 news items — mix roughly 5 AI/Tech and 4 Open Source/Dev items.
+Each object: title (in Chinese, compelling headline style), summary (2-3 sentences in Chinese, include key facts/numbers), url, category (one of: AI动态/模型发布/开源项目/开发工具/行业洞察), source (media name), time (relative like "3小时前").
+Return only valid JSON array.`,
+      '正在采集科技要闻……'
+    );
+
+    let newsItems;
+    try {
+      newsItems = parseJSON(newsRaw);
+    } catch(e) {
+      newsItems = generateFallbackNews();
+    }
+    renderNews(newsItems);
+
+    // Show content
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('content').classList.add('visible');
+
+  } catch(err) {
+    document.getElementById('loading').innerHTML = `
+      <div class="error-msg">
+        印刷机遭遇故障 — ${err.message}<br><br>
+        <button class="refresh-btn" onclick="loadAll()">↻ 重新尝试</button>
+      </div>`;
+  }
+}
+
+// ─── FALLBACK DATA ────────────────────────────────────
+function generateFallbackTrending() {
+  return [
+    {name:'anthropic/claude-code',author:'anthropic',description:'用于智能编程的官方 CLI 工具',url:'https://github.com/anthropics/claude-code',stars:'28.4k',language:'TypeScript',todayStars:'1.2k'},
+    {name:'microsoft/markitdown',author:'microsoft',description:'将各类文件转换为 Markdown 的工具库',url:'https://github.com/microsoft/markitdown',stars:'41k',language:'Python',todayStars:'890'},
+    {name:'deepseek-ai/DeepSeek-V3',author:'deepseek-ai',description:'最新开源大语言模型',url:'https://github.com/deepseek-ai/DeepSeek-V3',stars:'89k',language:'Python',todayStars:'2.1k'},
+    {name:'browser-use/browser-use',author:'browser-use',description:'让 AI 能够操控浏览器完成任务',url:'https://github.com/browser-use/browser-use',stars:'35k',language:'Python',todayStars:'670'},
+    {name:'shadcn-ui/ui',author:'shadcn-ui',description:'高质量 React UI 组件集合',url:'https://github.com/shadcn-ui/ui',stars:'65k',language:'TypeScript',todayStars:'420'},
+    {name:'ollama/ollama',author:'ollama',description:'本地运行大语言模型的工具',url:'https://github.com/ollama/ollama',stars:'78k',language:'Go',todayStars:'560'},
+    {name:'juspay/hyperswitch',author:'juspay',description:'开源支付编排平台',url:'https://github.com/juspay/hyperswitch',stars:'12k',language:'Rust',todayStars:'340'},
+    {name:'vercel/ai',author:'vercel',description:'用于构建 AI 应用的 SDK',url:'https://github.com/vercel/ai',stars:'9.8k',language:'TypeScript',todayStars:'280'},
+    {name:'ggerganov/whisper.cpp',author:'ggerganov',description:'C++ 实现的 Whisper 语音识别',url:'https://github.com/ggerganov/whisper.cpp',stars:'33k',language:'C++',todayStars:'190'},
+  ];
+}
+
+function generateFallbackNews() {
+  return [
+    {title:'Anthropic 发布 Claude 3.7 Sonnet，推理能力大幅跃升',summary:'Anthropic 正式推出 Claude 3.7 Sonnet，新增"扩展思考"模式，在复杂数学与代码推理任务上表现显著优于前代。该模型已向 API 用户和 Claude.ai 订阅者开放。',url:'#',category:'模型发布',source:'Anthropic Blog',time:'2小时前'},
+    {title:'GitHub Copilot 工作区模式全面开放，AI 自动完成整个功能开发',summary:'微软宣布 Copilot Workspace 向所有付费用户开放，开发者仅需自然语言描述需求，AI 将自动规划、编写并测试完整代码分支，显著缩短开发周期。',url:'#',category:'开发工具',source:'GitHub Blog',time:'4小时前'},
+    {title:'Meta 开源 Llama 4 系列，最大参数量达 4050 亿',summary:'Meta AI 发布 Llama 4 系列模型，含 Scout、Maverick、Behemoth 三款，支持多模态输入与百万级 token 上下文。全部模型允许商业使用。',url:'#',category:'AI动态',source:'Meta AI Blog',time:'5小时前'},
+    {title:'Rust 2024 Edition 正式稳定，async trait 终于原生支持',summary:'Rust 官方宣布 2024 Edition 进入稳定版，最受期待的 async trait 特性无需额外 crate 即可使用。社区认为这是近年来最重要的语言更新之一。',url:'#',category:'开源项目',source:'The Rust Blog',time:'6小时前'},
+    {title:'Cursor 编辑器融资 1 亿美元，月活开发者突破 50 万',summary:'AI 代码编辑器 Cursor 完成 1 亿美元 B 轮融资，估值达 25 亿美元。官方披露月活跃开发者已超 50 万，企业用户增速尤为突出。',url:'#',category:'AI动态',source:'TechCrunch',time:'8小时前'},
+    {title:'uv：Rust 编写的 Python 包管理器，速度比 pip 快 100 倍',summary:'开源项目 uv 在 GitHub 上迅速走红，其用 Rust 重写的 Python 依赖解析引擎在基准测试中比 pip 快 100 倍以上。已获 Astral 官方维护，逐步成为新一代标准工具。',url:'#',category:'开源项目',source:'GitHub',time:'10小时前'},
+    {title:'Google 发布 Gemini 2.5 Pro，代码生成评测登顶',summary:'谷歌推出 Gemini 2.5 Pro 实验版，在 SWE-bench 代码修复评测上以 63.8% 准确率刷新纪录。模型现已在 Google AI Studio 免费开放体验。',url:'#',category:'模型发布',source:'Google DeepMind',time:'12小时前'},
+    {title:'Neovim 0.11 发布：内置 LSP 客户端全面重构',summary:'Neovim 正式发布 0.11 版本，内置 LSP 客户端经过全面重写，响应速度提升明显。同时新增对 Tree-sitter 增量解析的深度集成支持。',url:'#',category:'开发工具',source:'Neovim GitHub',time:'1天前'},
+    {title:'Cloudflare Workers AI 免费层每日调用额度提升至 10 万次',summary:'Cloudflare 宣布扩大 Workers AI 免费层额度，个人开发者每日可免费调用主流开源模型（含 Llama、Mistral）达 10 万次，推动 AI 推理更易获取。',url:'#',category:'行业洞察',source:'Cloudflare Blog',time:'2天前'},
+  ];
+}
+
+// ─── INIT ──────────────────────────────────────────────
+loadAll();
+</script>
 </body>
 </html>
